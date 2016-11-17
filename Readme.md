@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Андрей Алексеев](https://up.htmlacademy.ru/ecmascript/1/user/4596).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Жирков](https://github.com/aralot).
 
 ---
 
