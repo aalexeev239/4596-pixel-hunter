@@ -1,7 +1,4 @@
-import getElementFromTemplate from '../utils/getElementFromTemplate';
-
-const templateString = `
-<header class="header">
+export const statsTemplate = `<header class="header">
   <div class="header__back">
     <span class="back">
       <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -108,7 +105,4 @@ const templateString = `
       <td colspan="5" class="result__total  result__total--final">950</td>
     </tr>
   </table>
-</div>
-`;
-
-export default getElementFromTemplate(templateString);
+</div>`;

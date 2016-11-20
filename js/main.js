@@ -1,10 +1,12 @@
-import introElement from './templates/introTemplate';
-import greetingElement from './templates/greetingTemplate';
-import rulesElement from './templates/rulesTemplate';
-import game1Element from './templates/game1Template';
-import game2Element from './templates/game2Template';
-import game3Element from './templates/game3Template';
-import statsElement from './templates/statsTemplate';
+import {
+  introElement,
+  greetingElement,
+  rulesElement,
+  game1Element,
+  game2Element,
+  game3Element,
+  statsElement
+} from './templateElements';
 
 
 (() => {

@@ -1,7 +1,4 @@
-import getElementFromTemplate from '../utils/getElementFromTemplate';
-
-const templateString = `
-<header class="header">
+export const game2Template = `<header class="header">
   <div class="header__back">
     <span class="back">
       <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -44,7 +41,4 @@ const templateString = `
       <li class="stats__result stats__result--unknown"></li>
     </ul>
   </div>
-</div>
-`;
-
-export default getElementFromTemplate(templateString);
+</div>`;
