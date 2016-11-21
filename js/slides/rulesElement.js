@@ -1,8 +1,8 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 
-import {rulesTemplate} from '../templates/rulesTemplate';
-import {game1Element} from './index';
+import rulesTemplate from '../templates/rulesTemplate';
+import game1Element from './game1Element';
 
 const rulesElement = getElementFromTemplate(rulesTemplate);
 const formElement = rulesElement.querySelector('.rules__form');
@@ -33,4 +33,4 @@ if (formElement && inputElement && submitElement) {
   formElement.addEventListener('submit', onSubmit);
 }
 
-export {rulesElement};
+export default rulesElement;

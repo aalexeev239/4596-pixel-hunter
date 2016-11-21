@@ -1,4 +1,4 @@
-export const game3Template = `<header class="header">
+const game3Template = `<header class="header">
   <div class="header__back">
     <span class="back">
       <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -40,3 +40,5 @@ export const game3Template = `<header class="header">
     </ul>
   </div>
 </div>`;
+
+export default game3Template;
