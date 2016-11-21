@@ -11,6 +11,7 @@ if (asteriskElement) {
   let onClick = (ev) => {
     ev.preventDefault();
     renderSlide(greetingElement);
+    cleanup();
   };
 
   let cleanup = () => {

@@ -11,6 +11,7 @@ if (continueElement) {
   let onClick = (ev) => {
     ev.preventDefault();
     renderSlide(rulesElement);
+    cleanup();
   };
 
   let cleanup = () => {
