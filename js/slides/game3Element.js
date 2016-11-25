@@ -1,7 +1,7 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 
-import game3Template from '../templates/game3Template';
+import game3Template from '../templates/game3';
 import statsElement from './statsElement';
 
 const game3Element = getElementFromTemplate(game3Template);

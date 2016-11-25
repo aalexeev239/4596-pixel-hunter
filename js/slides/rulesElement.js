@@ -1,7 +1,7 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 
-import rulesTemplate from '../templates/rulesTemplate';
+import rulesTemplate from '../templates/rules';
 import game1Element from './game1Element';
 
 const rulesElement = getElementFromTemplate(rulesTemplate);

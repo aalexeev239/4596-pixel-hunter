@@ -1,7 +1,7 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 
-import introTemplate from '../templates/introTemplate';
+import introTemplate from '../templates/intro';
 import greetingElement from './greetingElement';
 
 const introElement = getElementFromTemplate(introTemplate);

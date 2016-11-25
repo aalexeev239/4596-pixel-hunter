@@ -1,6 +1,6 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 
-import statsTemplate from '../templates/statsTemplate';
+import statsTemplate from '../templates/stats';
 
 const statsElement = getElementFromTemplate(statsTemplate);
 
