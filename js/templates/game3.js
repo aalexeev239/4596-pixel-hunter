@@ -1,4 +1,4 @@
-export const game2Template = `<header class="header">
+const game3Template = `<header class="header">
   <div class="header__back">
     <span class="back">
       <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -13,18 +13,16 @@ export const game2Template = `<header class="header">
   </div>
 </header>
 <div class="game">
-  <p class="game__task">Угадай, фото или рисунок?</p>
-  <form class="game__content  game__content--wide">
+  <p class="game__task">Найдите рисунок среди изображений</p>
+  <form class="game__content  game__content--triple">
     <div class="game__option">
-      <img src="http://placehold.it/705x455" alt="Option 1" width="705" height="455">
-      <label class="game__answer  game__answer--photo">
-        <input name="question1" type="radio" value="photo">
-        <span>Фото</span>
-      </label>
-      <label class="game__answer  game__answer--wide  game__answer--paint">
-        <input name="question1" type="radio" value="paint">
-        <span>Рисунок</span>
-      </label>
+      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+    </div>
+    <div class="game__option  game__option--selected">
+      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+    </div>
+    <div class="game__option">
+      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
     </div>
   </form>
   <div class="stats">
@@ -42,3 +40,5 @@ export const game2Template = `<header class="header">
     </ul>
   </div>
 </div>`;
+
+export default game3Template;
