@@ -7,9 +7,9 @@ import game1Element from './game1Element';
 const rulesElement = getElementFromTemplate(rulesTemplate);
 const formElement = rulesElement.querySelector('.rules__form');
 const inputElement = rulesElement.querySelector('.rules__input');
-const submitElement = formElement.querySelector('.rules__button');
+const submitElement = rulesElement.querySelector('.rules__button');
 
-if (formElement && inputElement && submitElement) {
+if (true || formElement && inputElement && submitElement) {
 
   const onInput = () => {
     submitElement.disabled = inputElement.value.length === 0;
