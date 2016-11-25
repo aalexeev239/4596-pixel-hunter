@@ -8,8 +8,7 @@ const introElement = getElementFromTemplate(introTemplate);
 const asteriskElement = introElement.querySelector('.intro__asterisk');
 
 if (asteriskElement) {
-  const onClick = (ev) => {
-    ev.preventDefault();
+  const onClick = () => {
     renderSlide(greetingElement);
     cleanup();
   };

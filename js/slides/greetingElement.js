@@ -9,8 +9,7 @@ const continueElement = greetingElement.querySelector('.greeting__continue');
 
 if (continueElement) {
 
-  const onClick = (ev) => {
-    ev.preventDefault();
+  const onClick = () => {
     renderSlide(rulesElement);
     cleanup();
   };

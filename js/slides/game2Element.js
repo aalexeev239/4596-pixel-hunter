@@ -7,8 +7,7 @@ import game3Element from './game3Element';
 const game2Element = getElementFromTemplate(game2Template);
 const answerElements = Array.from(game2Element.querySelectorAll('.game__answer'));
 
-const onClick = (ev) => {
-  ev.preventDefault();
+const onClick = () => {
   renderSlide(game3Element);
   cleanup();
 };
