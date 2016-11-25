@@ -13,9 +13,9 @@ const onClick = () => {
 };
 
 const cleanup = () => {
-  answerElements.forEach((elem)=>elem.removeEventListener('click', onClick));
+  answerElements.forEach((elem) => elem.removeEventListener('click', onClick));
 };
 
-answerElements.forEach((elem)=>elem.addEventListener('click', onClick));
+answerElements.forEach((elem) => elem.addEventListener('click', onClick));
 
 export default game1Element;
