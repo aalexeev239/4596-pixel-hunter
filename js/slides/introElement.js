@@ -8,13 +8,13 @@ const introElement = getElementFromTemplate(introTemplate);
 const asteriskElement = introElement.querySelector('.intro__asterisk');
 
 if (asteriskElement) {
-  let onClick = (ev) => {
+  const onClick = (ev) => {
     ev.preventDefault();
     renderSlide(greetingElement);
     cleanup();
   };
 
-  let cleanup = () => {
+  const cleanup = () => {
     asteriskElement.removeEventListener('click', onClick);
   };
 

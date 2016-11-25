@@ -8,13 +8,14 @@ const greetingElement = getElementFromTemplate(greetingTemplate);
 const continueElement = greetingElement.querySelector('.greeting__continue');
 
 if (continueElement) {
-  let onClick = (ev) => {
+
+  const onClick = (ev) => {
     ev.preventDefault();
     renderSlide(rulesElement);
     cleanup();
   };
 
-  let cleanup = () => {
+  const cleanup = () => {
     continueElement.removeEventListener('click', onClick);
   };
 

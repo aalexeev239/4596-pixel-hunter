@@ -11,11 +11,11 @@ const submitElement = formElement.querySelector('.rules__button');
 
 if (formElement && inputElement && submitElement) {
 
-  let onInput = () => {
+  const onInput = () => {
     submitElement.disabled = inputElement.value.length === 0;
   };
 
-  let onSubmit = (ev) => {
+  const onSubmit = (ev) => {
     ev.preventDefault();
 
     if (inputElement.value.length > 0) {
@@ -24,7 +24,7 @@ if (formElement && inputElement && submitElement) {
     }
   };
 
-  let cleanup = () => {
+  const cleanup = () => {
     inputElement.removeEventListener('input', onInput);
     formElement.removeEventListener('submit', onSubmit);
   };
