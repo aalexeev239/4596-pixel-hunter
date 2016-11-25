@@ -11,14 +11,18 @@ const submitElement = rulesElement.querySelector('.rules__button');
 
 if (formElement && inputElement && submitElement) {
 
+  const checkInputValidity = () => {
+    return inputElement.value.trim().length > 0;
+  };
+
   const onInput = () => {
-    submitElement.disabled = inputElement.value.length === 0;
+    submitElement.disabled = !checkInputValidity();
   };
 
   const onSubmit = (ev) => {
     ev.preventDefault();
 
-    if (inputElement.value.length > 0) {
+    if (checkInputValidity()) {
       renderSlide(game1Element);
       cleanup();
     }
