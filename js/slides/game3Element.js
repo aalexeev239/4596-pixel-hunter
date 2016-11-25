@@ -7,18 +7,16 @@ import statsElement from './statsElement';
 const game3Element = getElementFromTemplate(game3Template);
 const answerElements = Array.from(game3Element.querySelectorAll('.game__option'));
 
-if (answerElements.length) {
-  let onClick = (ev) => {
-    ev.preventDefault();
-    renderSlide(statsElement);
-    cleanup();
-  };
+const onClick = (ev) => {
+  ev.preventDefault();
+  renderSlide(statsElement);
+  cleanup();
+};
 
-  let cleanup = () => {
-    answerElements.forEach((elem) => elem.removeEventListener('click', onClick));
-  };
+const cleanup = () => {
+  answerElements.forEach((elem) => elem.removeEventListener('click', onClick));
+};
 
-  answerElements.forEach((elem) => elem.addEventListener('click', onClick));
-}
+answerElements.forEach((elem) => elem.addEventListener('click', onClick));
 
 export default game3Element;
