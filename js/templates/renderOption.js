@@ -1,4 +1,4 @@
-const func = ({image:{url, alt, w, h}, name}) => `<div class="game__option">
+const func = ({image: {url, alt, w, h}, name}) => `<div class="game__option">
       <img src="${url}" alt="${alt}" width="${w}" height="${h}">
       <label class="game__answer game__answer--photo">
         <input name="${name}" type="radio" value="photo">

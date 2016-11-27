@@ -7,7 +7,7 @@ import renderStats from '../templates/renderStats';
 
 
 const data = {
-  title: 'Победа!',
+  pagetitle: 'Победа!',
   results: [
     {
       id: 1,
@@ -199,7 +199,7 @@ const data = {
   ]
 };
 
-const {title, results} = data;
+const {pagetitle, results} = data;
 
 const renderResult = (result) => {
   const {number, answersQueue, additionals, isSuccess, final} = result;
@@ -216,16 +216,16 @@ const renderResult = (result) => {
     ${isSuccess ? `<tr>
       <td colspan="5" class="result__total  result__total--final">${final}</td>
     </tr>` : ''}
-  </table>`
+  </table>`;
 };
 
 const renderResultScore = ({isSuccess, points, total, final}) => {
   if (isSuccess) {
     return `<td class="result__points">×&nbsp;${points}</td>
-      <td class="result__total">${total}</td>`
+      <td class="result__total">${total}</td>`;
   } else {
     return `<td class="result__total"></td>
-      <td class="result__total  result__total--final">fail</td>`
+      <td class="result__total  result__total--final">fail</td>`;
   }
 };
 
@@ -242,7 +242,7 @@ const template = `<header class="header">
   
   </header>
   <div class="result">
-    <h1>${title}</h1>
+    <h1>${pagetitle}</h1>
     ${results.map(renderResult).join('\n')}
   </div>`;
 

@@ -92,7 +92,7 @@ const data = {
 
 const {time, lives, task, answersQueue, options} = data;
 
-const renderOption = ({image:{url, alt, w, h}, isSelected}) => `<div class="game__option${isSelected ? ' game__option--selected' : ''}">
+const renderOption = ({image: {url, alt, w, h}, isSelected}) => `<div class="game__option${isSelected ? ' game__option--selected' : ''}">
     <img src="${url}" alt="${alt}" width="${w}" height="${h}">
   </div>`;
 

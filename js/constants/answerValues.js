@@ -4,4 +4,4 @@ export default {
   FAST: 'fast',
   CORRECT: 'correct',
   UNKNOWN: 'unknown'
-}
+};
