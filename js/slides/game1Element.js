@@ -1,10 +1,101 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 
-import game1Template from '../templates/game1';
+import answerValues from '../constants/answerValues';
+
+import renderGameHeader from '../templates/renderGameHeader';
+import renderOption from '../templates/renderOption';
+import renderStats from '../templates/renderStats';
 import game2Element from './game2Element';
 
-const game1Element = getElementFromTemplate(game1Template);
+const data = {
+  time: 'NN',
+  lives: {
+    left: 2,
+    total: 3
+  },
+  task: 'Угадайте для каждого изображения фото или рисунок?',
+  answersQueue: [
+    {
+      id: 1,
+      value: answerValues.WRONG
+    },
+    {
+      id: 2,
+      value: answerValues.SLOW
+    },
+    {
+      id: 3,
+      value: answerValues.FAST
+    },
+    {
+      id: 4,
+      value: answerValues.CORRECT
+    },
+    {
+      id: 5,
+      value: answerValues.UNKNOWN
+    },
+    {
+      id: 6,
+      value: answerValues.UNKNOWN
+    },
+    {
+      id: 7,
+      value: answerValues.UNKNOWN
+    },
+    {
+      id: 8,
+      value: answerValues.UNKNOWN
+    },
+    {
+      id: 9,
+      value: answerValues.UNKNOWN
+    },
+    {
+      id: 10,
+      value: answerValues.UNKNOWN
+    }
+  ],
+  options: [
+    {
+      id: 1,
+      name: 'question1',
+      image: {
+        url: 'http://placehold.it/468x458',
+        alt: 'Option 1',
+        w: 468,
+        h: 458
+      }
+    },
+    {
+      id: 2,
+      name: 'question2',
+      image: {
+        url: 'http://placehold.it/468x458',
+        alt: 'Option 2',
+        w: 468,
+        h: 458
+      }
+    }
+  ]
+};
+
+const {time, lives, task, answersQueue, options} = data;
+
+const template = `
+  ${renderGameHeader({time, lives})}
+<div class="game">
+  <p class="game__task">${task}</p>
+  <form class="game__content">
+    ${options.map(renderOption).join('\n')}
+  </form>
+  <div class="stats">
+    ${renderStats(answersQueue)}
+  </div>
+</div>`;
+
+const game1Element = getElementFromTemplate(template);
 const answerElements = Array.from(game1Element.querySelectorAll('.game__answer'));
 
 const onClick = () => {
