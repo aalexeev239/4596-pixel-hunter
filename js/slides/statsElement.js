@@ -7,7 +7,7 @@ import renderStats from '../templates/renderStats';
 
 
 const data = {
-  pagetitle: 'Победа!',
+  pageTitle: 'Победа!',
   results: [
     {
       number: 1,
@@ -162,7 +162,7 @@ const data = {
   ]
 };
 
-const {pagetitle, results} = data;
+const {pageTitle, results} = data;
 
 const renderResult = (result) => {
   const {number, answersQueue, additionals, isSuccess, final} = result;
@@ -205,7 +205,7 @@ const template = `<header class="header">
   
   </header>
   <div class="result">
-    <h1>${pagetitle}</h1>
+    <h1>${pageTitle}</h1>
     ${results.map(renderResult).join('\n')}
   </div>`;
 
