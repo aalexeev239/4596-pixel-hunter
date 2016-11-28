@@ -15,45 +15,35 @@ const data = {
     total: 3
   },
   task: 'Угадай, фото или рисунок?',
-  answersQueue: [
+  answersList: [
     {
-      id: 1,
       value: answerValues.WRONG
     },
     {
-      id: 2,
       value: answerValues.SLOW
     },
     {
-      id: 3,
       value: answerValues.FAST
     },
     {
-      id: 4,
       value: answerValues.CORRECT
     },
     {
-      id: 5,
       value: answerValues.WRONG
     },
     {
-      id: 6,
       value: answerValues.UNKNOWN
     },
     {
-      id: 7,
       value: answerValues.SLOW
     },
     {
-      id: 8,
       value: answerValues.UNKNOWN
     },
     {
-      id: 9,
       value: answerValues.FAST
     },
     {
-      id: 10,
       value: answerValues.UNKNOWN
     }
   ],

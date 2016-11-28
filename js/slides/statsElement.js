@@ -10,47 +10,36 @@ const data = {
   pagetitle: 'Победа!',
   results: [
     {
-      id: 1,
       number: 1,
-      answersQueue: [
+      answersList: [
         {
-          id: 1,
           value: answerValues.WRONG
         },
         {
-          id: 2,
           value: answerValues.SLOW
         },
         {
-          id: 3,
           value: answerValues.FAST
         },
         {
-          id: 4,
           value: answerValues.CORRECT
         },
         {
-          id: 5,
           value: answerValues.WRONG
         },
         {
-          id: 6,
           value: answerValues.UNKNOWN
         },
         {
-          id: 7,
           value: answerValues.SLOW
         },
         {
-          id: 8,
           value: answerValues.UNKNOWN
         },
         {
-          id: 9,
           value: answerValues.FAST
         },
         {
-          id: 10,
           value: answerValues.UNKNOWN
         }
       ],
@@ -59,7 +48,6 @@ const data = {
       total: 900,
       additionals: [
         {
-          id: 1,
           title: 'Бонус за скорость',
           extra: 1,
           icon: 'fast',
@@ -67,7 +55,6 @@ const data = {
           total: 50
         },
         {
-          id: 2,
           title: 'Бонус за жизни',
           extra: 2,
           icon: 'heart',
@@ -75,7 +62,6 @@ const data = {
           total: 100
         },
         {
-          id: 1,
           title: 'Штраф за медлительность',
           extra: 2,
           icon: 'slow',
@@ -86,47 +72,36 @@ const data = {
       final: 950
     },
     {
-      id: 2,
       number: 2,
-      answersQueue: [
+      answersList: [
         {
-          id: 1,
           value: answerValues.WRONG
         },
         {
-          id: 2,
           value: answerValues.SLOW
         },
         {
-          id: 3,
           value: answerValues.FAST
         },
         {
-          id: 4,
           value: answerValues.CORRECT
         },
         {
-          id: 5,
           value: answerValues.WRONG
         },
         {
-          id: 6,
           value: answerValues.UNKNOWN
         },
         {
-          id: 7,
           value: answerValues.SLOW
         },
         {
-          id: 8,
           value: answerValues.UNKNOWN
         },
         {
-          id: 9,
           value: answerValues.FAST
         },
         {
-          id: 10,
           value: answerValues.UNKNOWN
         }
       ],
@@ -137,47 +112,36 @@ const data = {
       final: null,
     },
     {
-      id: 3,
       number: 3,
-      answersQueue: [
+      answersList: [
         {
-          id: 1,
           value: answerValues.WRONG
         },
         {
-          id: 2,
           value: answerValues.SLOW
         },
         {
-          id: 3,
           value: answerValues.FAST
         },
         {
-          id: 4,
           value: answerValues.CORRECT
         },
         {
-          id: 5,
           value: answerValues.WRONG
         },
         {
-          id: 6,
           value: answerValues.UNKNOWN
         },
         {
-          id: 7,
           value: answerValues.SLOW
         },
         {
-          id: 8,
           value: answerValues.UNKNOWN
         },
         {
-          id: 9,
           value: answerValues.FAST
         },
         {
-          id: 10,
           value: answerValues.UNKNOWN
         }
       ],
@@ -186,7 +150,6 @@ const data = {
       total: 900,
       additionals: [
         {
-          id: 1,
           title: 'Бонус за жизни',
           extra: 2,
           icon: 'heart',

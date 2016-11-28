@@ -15,51 +15,40 @@ const data = {
     total: 3
   },
   task: 'Угадайте для каждого изображения фото или рисунок?',
-  answersQueue: [
+  answersList: [
     {
-      id: 1,
       value: answerValues.WRONG
     },
     {
-      id: 2,
       value: answerValues.SLOW
     },
     {
-      id: 3,
       value: answerValues.FAST
     },
     {
-      id: 4,
       value: answerValues.CORRECT
     },
     {
-      id: 5,
       value: answerValues.UNKNOWN
     },
     {
-      id: 6,
       value: answerValues.UNKNOWN
     },
     {
-      id: 7,
       value: answerValues.UNKNOWN
     },
     {
-      id: 8,
       value: answerValues.UNKNOWN
     },
     {
-      id: 9,
       value: answerValues.UNKNOWN
     },
     {
-      id: 10,
       value: answerValues.UNKNOWN
     }
   ],
   options: [
     {
-      id: 1,
       name: 'question1',
       image: {
         url: 'http://placehold.it/468x458',
@@ -69,7 +58,6 @@ const data = {
       }
     },
     {
-      id: 2,
       name: 'question2',
       image: {
         url: 'http://placehold.it/468x458',
@@ -81,7 +69,7 @@ const data = {
   ]
 };
 
-const {time, lives, task, answersQueue, options} = data;
+const {time, lives, task, answersList, options} = data;
 
 const template = `
   ${renderGameHeader({time, lives})}
@@ -91,7 +79,7 @@ const template = `
     ${options.map(renderOption).join('\n')}
   </form>
   <div class="stats">
-    ${renderStats(answersQueue)}
+    ${renderStats(answersList)}
   </div>
 </div>`;
 
