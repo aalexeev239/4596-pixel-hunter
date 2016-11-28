@@ -59,7 +59,7 @@ const data = {
   }
 };
 
-const {time, lives, task, answersQueue, option} = data;
+const {time, lives, task, answersList, option} = data;
 
 const template = `
   ${renderGameHeader({time, lives})}
@@ -69,7 +69,7 @@ const template = `
     ${renderOption(option)}
   </form>
   <div class="stats">
-    ${renderStats(answersQueue)}
+    ${renderStats(answersList)}
    </div>
 </div>`;
 

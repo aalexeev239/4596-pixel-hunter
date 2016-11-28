@@ -165,13 +165,12 @@ const data = {
 const {pageTitle, results} = data;
 
 const renderResult = (result) => {
-  const {number, answersQueue, additionals, isSuccess, final} = result;
-
+  const {number, answersList, additionals, isSuccess, final} = result;
   return `<table class="result__table">
     <tr>
       <td class="result__number">${number}.</td>
         <td colspan="2">
-          ${renderStats(answersQueue)}
+          ${renderStats(answersList)}
         </td>
         ${renderResultScore(result)}
     </tr>

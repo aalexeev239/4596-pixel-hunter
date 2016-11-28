@@ -77,7 +77,7 @@ const data = {
   ]
 };
 
-const {time, lives, task, answersQueue, options} = data;
+const {time, lives, task, answersList, options} = data;
 
 const renderOption = ({image: {url, title, width, height}, isSelected}) => `<div class="game__option${isSelected ? ' game__option--selected' : ''}">
     <img src="${url}" alt="${title}" width="${width}" height="${height}">
@@ -91,7 +91,7 @@ const template = `
     ${options.map(renderOption).join('\n')}
   </form>
   <div class="stats">
-    ${renderStats(answersQueue)}
+    ${renderStats(answersList)}
    </div>
 </div>`;
 
