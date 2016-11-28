@@ -73,15 +73,15 @@ const {time, lives, task, answersList, options} = data;
 
 const template = `
   ${renderGameHeader({time, lives})}
-<div class="game">
-  <p class="game__task">${task}</p>
-  <form class="game__content">
-    ${options.map(renderOption).join('\n')}
-  </form>
-  <div class="stats">
-    ${renderStats(answersList)}
-  </div>
-</div>`;
+  <div class="game">
+    <p class="game__task">${task}</p>
+    <form class="game__content">
+      ${options.map(renderOption).join('\n')}
+    </form>
+    <div class="stats">
+      ${renderStats(answersList)}
+    </div>
+  </div>`;
 
 const game1Element = getElementFromTemplate(template);
 const answerElements = Array.from(game1Element.querySelectorAll('.game__answer'));
