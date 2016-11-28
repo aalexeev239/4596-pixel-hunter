@@ -10,7 +10,6 @@ const data = {
   pageTitle: 'Победа!',
   results: [
     {
-      number: 1,
       answersList: [
         {
           value: answerValues.WRONG
@@ -72,7 +71,6 @@ const data = {
       final: 950
     },
     {
-      number: 2,
       answersList: [
         {
           value: answerValues.WRONG
@@ -112,7 +110,6 @@ const data = {
       final: null,
     },
     {
-      number: 3,
       answersList: [
         {
           value: answerValues.WRONG
@@ -164,11 +161,11 @@ const data = {
 
 const {pageTitle, results} = data;
 
-const renderResult = (result) => {
-  const {number, answersList, additionals, isSuccess, final} = result;
+const renderResult = (result, index) => {
+  const {answersList, additionals, isSuccess, final} = result;
   return `<table class="result__table">
     <tr>
-      <td class="result__number">${number}.</td>
+      <td class="result__number">${index + 1}.</td>
         <td colspan="2">
           ${renderStats(answersList)}
         </td>
