@@ -21,7 +21,7 @@ const formTemplate = `<form class="rules__form">
 
 const pluralizeAttempts = `${attempts} ${pluralize(attempts, 'раз', 'раза', 'раз')}`;
 const pluralizeAttemptTimeInSec = `${attemptTimeInSec} ${pluralize(attemptTimeInSec, 'секунда', 'секунды', 'секунд')}`;
-const pluralizeLives= `${lives} ${pluralize(lives, 'раз', 'раза', 'раз')}`;
+const pluralizeLives = `${lives} ${pluralize(lives, 'раз', 'раза', 'раз')}`;
 
 const rulesTemplate = `<div class="rules  central--none">
   <h1 class="rules__title">Правила</h1>
