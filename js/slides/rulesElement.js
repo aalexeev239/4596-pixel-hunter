@@ -1,4 +1,6 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
+import pluralize from '../utils/pluralizeNoun_ru';
+
 import renderSlide from '../renderSlide';
 
 import headerBackTemplate from '../templates/headerBack';
@@ -17,14 +19,18 @@ const formTemplate = `<form class="rules__form">
     <button class="rules__button  continue" type="submit" disabled>Go!</button>
   </form>`;
 
+const pluralizeAttempts = `${attempts} ${pluralize(attempts, 'раз', 'раза', 'раз')}`;
+const pluralizeAttemptTimeInSec = `${attemptTimeInSec} ${pluralize(attemptTimeInSec, 'секунда', 'секунды', 'секунд')}`;
+const pluralizeLives= `${lives} ${pluralize(lives, 'раз', 'раза', 'раз')}`;
+
 const rulesTemplate = `<div class="rules  central--none">
   <h1 class="rules__title">Правила</h1>
-  <p class="rules__description">Угадай ${attempts} раз для каждого изображения фото <img
+  <p class="rules__description">Угадай ${pluralizeAttempts} для каждого изображения фото <img
     src="img/photo_icon.png" width="16" height="16"> или рисунок <img
     src="img/paint_icon.png" width="16" height="16" alt="">.<br>
     Фотографиями или рисунками могут быть оба изображения.<br>
-    На каждую попытку отводится ${attemptTimeInSec} секунд.<br>
-    Ошибиться можно не более ${lives} раз.<br>
+    На каждую попытку отводится ${pluralizeAttemptTimeInSec}.<br>
+    Ошибиться можно не более ${pluralizeLives}.<br>
     <br>
     Готовы?
   </p>
