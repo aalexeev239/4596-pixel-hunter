@@ -52,9 +52,9 @@ const data = {
     name: 'question1',
     image: {
       url: 'http://placehold.it/705x455',
-      alt: 'Option 1',
-      w: 705,
-      h: 455
+      title: 'Option 1',
+      width: 705,
+      height: 455
     }
   }
 };

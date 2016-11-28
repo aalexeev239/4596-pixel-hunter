@@ -50,27 +50,27 @@ const data = {
     {
       image: {
         url: 'http://placehold.it/304x455',
-        alt: 'Option 1',
-        w: 304,
-        h: 455
+        title: 'Option 1',
+        width: 304,
+        height: 455
       },
       isSelected: false
     },
     {
       image: {
         url: 'http://placehold.it/304x455',
-        alt: 'Option 1',
-        w: 304,
-        h: 455
+        title: 'Option 1',
+        width: 304,
+        height: 455
       },
       isSelected: true
     },
     {
       image: {
         url: 'http://placehold.it/304x455',
-        alt: 'Option 1',
-        w: 304,
-        h: 455
+        title: 'Option 1',
+        width: 304,
+        height: 455
       },
       isSelected: false
     }
@@ -79,8 +79,8 @@ const data = {
 
 const {time, lives, task, answersQueue, options} = data;
 
-const renderOption = ({image: {url, alt, w, h}, isSelected}) => `<div class="game__option${isSelected ? ' game__option--selected' : ''}">
-    <img src="${url}" alt="${alt}" width="${w}" height="${h}">
+const renderOption = ({image: {url, title, width, height}, isSelected}) => `<div class="game__option${isSelected ? ' game__option--selected' : ''}">
+    <img src="${url}" alt="${title}" width="${width}" height="${height}">
   </div>`;
 
 const template = `
