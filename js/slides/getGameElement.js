@@ -7,7 +7,6 @@ import renderQuestion from '../templates/renderQuestion';
 import getStatsElement from './getStatsElement';
 import statsData from '../fixtures/statsData';
 
-
 const getGameElement = (data, questionCursor) => {
   const {time, lives, answers, questions} = data;
   const currentQuestion = questions[questionCursor];
@@ -19,9 +18,7 @@ const getGameElement = (data, questionCursor) => {
   const template = `
     ${renderGameHeader({time, lives})}
     <div class="game">
-   
       ${renderQuestion(currentQuestion)}
-     
       <div class="stats">
         ${renderStats(answers)}
       </div>

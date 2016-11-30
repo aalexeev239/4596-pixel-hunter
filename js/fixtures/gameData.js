@@ -1,7 +1,6 @@
 import questionTypes from '../constants/questionTypes';
 import answerValues from '../constants/answerValues';
 
-
 const data = {
   time: 'NN',
   lives: {
