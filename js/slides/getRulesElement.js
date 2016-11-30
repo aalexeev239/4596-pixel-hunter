@@ -52,8 +52,8 @@ ${rulesTemplate}`;
       ev.preventDefault();
 
       if (checkInputValidity()) {
-        renderSlide(getGameElement(gameData, 0));
         cleanup();
+        renderSlide(getGameElement(gameData, 0));
       }
     };
 

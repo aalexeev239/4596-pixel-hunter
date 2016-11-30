@@ -11,8 +11,8 @@ const getGreetingElement = () => {
   if (continueElement) {
 
     const onClick = () => {
-      renderSlide(getRulesElement(rulesData));
       cleanup();
+      renderSlide(getRulesElement(rulesData));
     };
 
     const cleanup = () => {

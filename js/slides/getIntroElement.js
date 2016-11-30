@@ -9,8 +9,8 @@ const getIntroElement = () => {
 
   if (asteriskElement) {
     const onClick = () => {
-      renderSlide(getGreetingElement());
       cleanup();
+      renderSlide(getGreetingElement());
     };
 
     const cleanup = () => {
