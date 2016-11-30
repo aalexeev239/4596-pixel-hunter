@@ -1,4 +1,4 @@
-import introElement from './slides/introElement';
+import getIntroElement from './slides/getIntroElement';
 import renderSlide from './renderSlide';
 
-renderSlide(introElement);
+renderSlide(getIntroElement());
