@@ -9,12 +9,7 @@ const getIntroElement = () => {
 
   if (asteriskElement) {
     const onClick = () => {
-      cleanup();
       renderSlide(getGreetingElement());
-    };
-
-    const cleanup = () => {
-      asteriskElement.removeEventListener('click', onClick);
     };
 
     asteriskElement.addEventListener('click', onClick);

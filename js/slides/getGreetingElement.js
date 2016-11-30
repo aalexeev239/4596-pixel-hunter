@@ -11,12 +11,7 @@ const getGreetingElement = () => {
   if (continueElement) {
 
     const onClick = () => {
-      cleanup();
       renderSlide(getRulesElement(rulesData));
-    };
-
-    const cleanup = () => {
-      continueElement.removeEventListener('click', onClick);
     };
 
     continueElement.addEventListener('click', onClick);

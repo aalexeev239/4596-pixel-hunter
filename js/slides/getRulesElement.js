@@ -52,14 +52,8 @@ ${rulesTemplate}`;
       ev.preventDefault();
 
       if (checkInputValidity()) {
-        cleanup();
         renderSlide(getGameElement(gameData, 0));
       }
-    };
-
-    const cleanup = () => {
-      inputElement.removeEventListener('input', onInput);
-      formElement.removeEventListener('submit', onSubmit);
     };
 
     inputElement.addEventListener('input', onInput);

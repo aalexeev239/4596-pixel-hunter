@@ -28,12 +28,7 @@ const getGameElement = (data, questionCursor) => {
   const element = getElementFromTemplate(template);
   let answerElements = [];
 
-  const cleanup = () => {
-    answerElements.forEach((elem) => elem.removeEventListener('click', goNext));
-  };
-
   const goNext = () => {
-    cleanup();
     if (questionCursor < questions.length - 1) {
       renderSlide(getGameElement(data, questionCursor + 1));
     } else {
