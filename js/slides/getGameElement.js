@@ -28,7 +28,9 @@ const getGameElement = (data, questionCursor) => {
   const element = getElementFromTemplate(template);
   let answerElements = [];
 
-  const goNext = () => {
+  const goNext = (ev) => {
+    ev.preventDefault();
+
     if (questionCursor < questions.length - 1) {
       renderSlide(getGameElement(data, questionCursor + 1));
     } else {
