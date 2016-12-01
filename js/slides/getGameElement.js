@@ -27,9 +27,26 @@ const getGameElement = (data, questionCursor) => {
 
   const element = getElementFromTemplate(template);
   let answerElements = [];
+  let levelImages = [];
 
   const goNext = (ev) => {
     ev.preventDefault();
+
+    if (currentQuestion.type === questionTypes.GUESS_EVERY_ITEM) {
+      // select current image
+      const currentOption = ev.target.closest('.game__option');
+      // remove listeners
+      Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', goNext));
+
+      // remove current image from array
+      if (~levelImages.indexOf(currentOption)) {
+        levelImages.splice(levelImages.indexOf(currentOption), 1);
+      }
+      // if there are images to click
+      if (levelImages.length) {
+        return;
+      }
+    }
 
     if (questionCursor < questions.length - 1) {
       renderSlide(getGameElement(data, questionCursor + 1));
@@ -43,6 +60,7 @@ const getGameElement = (data, questionCursor) => {
       answerElements = Array.from(element.querySelectorAll('.game__answer'));
       break;
     case questionTypes.GUESS_EVERY_ITEM:
+      levelImages = Array.from(element.querySelectorAll('.game__option'));
       answerElements = Array.from(element.querySelectorAll('.game__answer'));
       break;
     case questionTypes.FIND_PAINT:
