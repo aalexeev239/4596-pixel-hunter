@@ -31,6 +31,19 @@ const getGameElement = (data, questionCursor) => {
   let answerElements = [];
   let levelOptions = [];
 
+  switch (currentQuestion.type) {
+    case questionTypes.GUESS_SINGLE_OPTION:
+      answerElements = Array.from(element.querySelectorAll('.game__answer'));
+      break;
+    case questionTypes.GUESS_EVERY_OPTION:
+      levelOptions = Array.from(element.querySelectorAll('.game__option'));
+      answerElements = Array.from(element.querySelectorAll('.game__answer'));
+      break;
+    case questionTypes.FIND_PAINT:
+      answerElements = Array.from(element.querySelectorAll('.game__option'));
+      break;
+  }
+
   const goNext = (ev) => {
     ev.preventDefault();
 
@@ -61,19 +74,6 @@ const getGameElement = (data, questionCursor) => {
       renderSlide(getStatsElement(statsData));
     }
   };
-
-  switch (currentQuestion.type) {
-    case questionTypes.GUESS_SINGLE_OPTION:
-      answerElements = Array.from(element.querySelectorAll('.game__answer'));
-      break;
-    case questionTypes.GUESS_EVERY_OPTION:
-      levelOptions = Array.from(element.querySelectorAll('.game__option'));
-      answerElements = Array.from(element.querySelectorAll('.game__answer'));
-      break;
-    case questionTypes.FIND_PAINT:
-      answerElements = Array.from(element.querySelectorAll('.game__option'));
-      break;
-  }
 
   answerElements.forEach((elem) => elem.addEventListener('click', goNext));
 
