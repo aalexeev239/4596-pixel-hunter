@@ -44,7 +44,7 @@ const getGameElement = (data, questionCursor) => {
       break;
   }
 
-  const goNext = (ev) => {
+  const onClick = (ev) => {
     ev.preventDefault();
 
     if (currentQuestion.type === questionTypes.GUESS_EVERY_OPTION) {
@@ -56,7 +56,7 @@ const getGameElement = (data, questionCursor) => {
       }
 
       // remove listeners
-      Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', goNext));
+      Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', onClick));
 
       // remove current image from array
       if (~levelOptions.indexOf(currentOption)) {
@@ -68,6 +68,11 @@ const getGameElement = (data, questionCursor) => {
       }
     }
 
+    goNext();
+  };
+
+  const goNext = () => {
+
     if (questionCursor < questions.length - 1) {
       renderSlide(getGameElement(data, questionCursor + 1));
     } else {
@@ -75,7 +80,7 @@ const getGameElement = (data, questionCursor) => {
     }
   };
 
-  answerElements.forEach((elem) => elem.addEventListener('click', goNext));
+  answerElements.forEach((elem) => elem.addEventListener('click', onClick));
 
   return element;
 };
