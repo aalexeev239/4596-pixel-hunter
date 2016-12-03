@@ -6,14 +6,14 @@ import renderOptionSelect from './renderOptionSelect';
 const func = (question) => {
   const {type} = question;
   switch (type) {
-    case questionTypes.GUESS_SINGLE_ITEM:
-      return `<p class="game__task">${questionTypes.GUESS_SINGLE_ITEM}</p>
+    case questionTypes.GUESS_SINGLE_OPTION:
+      return `<p class="game__task">${questionTypes.GUESS_SINGLE_OPTION}</p>
         <form class="game__content">
           ${renderOptionChoose(question.option)}
         </form>`;
 
-    case questionTypes.GUESS_EVERY_ITEM:
-      return `<p class="game__task">${questionTypes.GUESS_SINGLE_ITEM}</p>
+    case questionTypes.GUESS_EVERY_OPTION:
+      return `<p class="game__task">${questionTypes.GUESS_SINGLE_OPTION}</p>
         <form class="game__content">
           ${question.options.map(renderOptionChoose).join('\n')}
         </form>`;

@@ -29,12 +29,12 @@ const getGameElement = (data, questionCursor) => {
 
   const element = getElementFromTemplate(template);
   let answerElements = [];
-  let levelImages = [];
+  let levelOptions = [];
 
   const goNext = (ev) => {
     ev.preventDefault();
 
-    if (currentQuestion.type === questionTypes.GUESS_EVERY_ITEM) {
+    if (currentQuestion.type === questionTypes.GUESS_EVERY_OPTION) {
       // select current image
       const currentOption = getClosestNode(ev.target, 'game__option');
 
@@ -46,11 +46,11 @@ const getGameElement = (data, questionCursor) => {
       Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', goNext));
 
       // remove current image from array
-      if (~levelImages.indexOf(currentOption)) {
-        levelImages.splice(levelImages.indexOf(currentOption), 1);
+      if (~levelOptions.indexOf(currentOption)) {
+        levelOptions.splice(levelOptions.indexOf(currentOption), 1);
       }
       // if there are images to click
-      if (levelImages.length) {
+      if (levelOptions.length) {
         return;
       }
     }
@@ -63,11 +63,11 @@ const getGameElement = (data, questionCursor) => {
   };
 
   switch (currentQuestion.type) {
-    case questionTypes.GUESS_SINGLE_ITEM:
+    case questionTypes.GUESS_SINGLE_OPTION:
       answerElements = Array.from(element.querySelectorAll('.game__answer'));
       break;
-    case questionTypes.GUESS_EVERY_ITEM:
-      levelImages = Array.from(element.querySelectorAll('.game__option'));
+    case questionTypes.GUESS_EVERY_OPTION:
+      levelOptions = Array.from(element.querySelectorAll('.game__option'));
       answerElements = Array.from(element.querySelectorAll('.game__answer'));
       break;
     case questionTypes.FIND_PAINT:

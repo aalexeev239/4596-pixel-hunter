@@ -9,7 +9,7 @@ const data = {
   },
   questions: [
     {
-      type: questionTypes.GUESS_EVERY_ITEM,
+      type: questionTypes.GUESS_EVERY_OPTION,
       options: [
         {
           name: 'question1',
@@ -32,7 +32,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_SINGLE_ITEM,
+      type: questionTypes.GUESS_SINGLE_OPTION,
       option: {
         name: 'question1',
         image: {
@@ -76,7 +76,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_EVERY_ITEM,
+      type: questionTypes.GUESS_EVERY_OPTION,
       options: [
         {
           name: 'question1',
@@ -99,7 +99,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_SINGLE_ITEM,
+      type: questionTypes.GUESS_SINGLE_OPTION,
       option: {
         name: 'question1',
         image: {
@@ -143,7 +143,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_EVERY_ITEM,
+      type: questionTypes.GUESS_EVERY_OPTION,
       options: [
         {
           name: 'question1',
@@ -166,7 +166,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_SINGLE_ITEM,
+      type: questionTypes.GUESS_SINGLE_OPTION,
       option: {
         name: 'question1',
         image: {
@@ -210,7 +210,7 @@ const data = {
       ]
     },
     {
-      type: questionTypes.GUESS_EVERY_ITEM,
+      type: questionTypes.GUESS_EVERY_OPTION,
       options: [
         {
           name: 'question1',
