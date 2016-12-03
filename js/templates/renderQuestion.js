@@ -4,8 +4,7 @@ import renderOptionSelect from './renderOptionSelect';
 
 
 const func = (question) => {
-  const {type} = question;
-  switch (type) {
+  switch (question.type) {
     case questionTypes.GUESS_SINGLE_OPTION:
       return `<p class="game__task">${questionTypes.GUESS_SINGLE_OPTION}</p>
         <form class="game__content">
