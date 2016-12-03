@@ -1,4 +1,5 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
+import getClosestNode from '../utils/getClosestNode';
 import renderSlide from '../renderSlide';
 import questionTypes from '../constants/questionTypes';
 import renderGameHeader from '../templates/renderGameHeader';
@@ -6,6 +7,7 @@ import renderStats from '../templates/renderStats';
 import renderQuestion from '../templates/renderQuestion';
 import getStatsElement from './getStatsElement';
 import statsData from '../fixtures/statsData';
+
 
 const getGameElement = (data, questionCursor) => {
   const {time, lives, answers, questions} = data;
@@ -34,7 +36,12 @@ const getGameElement = (data, questionCursor) => {
 
     if (currentQuestion.type === questionTypes.GUESS_EVERY_ITEM) {
       // select current image
-      const currentOption = ev.target.closest('.game__option');
+      const currentOption = getClosestNode(ev.target, 'game__option');
+
+      if (!currentOption) {
+        return;
+      }
+
       // remove listeners
       Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', goNext));
 
