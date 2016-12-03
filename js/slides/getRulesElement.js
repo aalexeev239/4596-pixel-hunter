@@ -17,21 +17,21 @@ const getRulesElement = ({attempts, attemptTimeInSec, lives}) => {
   const pluralizeLives = `${lives} ${pluralize(lives, 'раз', 'раза', 'раз')}`;
 
   const rulesTemplate = `<div class="rules  central--none">
-  <h1 class="rules__title">Правила</h1>
-  <p class="rules__description">Угадай ${pluralizeAttempts} для каждого изображения фото <img
-    src="img/photo_icon.png" width="16" height="16"> или рисунок <img
-    src="img/paint_icon.png" width="16" height="16" alt="">.<br>
-    Фотографиями или рисунками могут быть оба изображения.<br>
-    На каждую попытку отводится ${pluralizeAttemptTimeInSec}.<br>
-    Ошибиться можно не более ${pluralizeLives}.<br>
-    <br>
-    Готовы?
-  </p>
-  ${formTemplate}
-</div>`;
+    <h1 class="rules__title">Правила</h1>
+    <p class="rules__description">Угадай ${pluralizeAttempts} для каждого изображения фото <img
+      src="img/photo_icon.png" width="16" height="16"> или рисунок <img
+      src="img/paint_icon.png" width="16" height="16" alt="">.<br>
+      Фотографиями или рисунками могут быть оба изображения.<br>
+      На каждую попытку отводится ${pluralizeAttemptTimeInSec}.<br>
+      Ошибиться можно не более ${pluralizeLives}.<br>
+      <br>
+      Готовы?
+    </p>
+    ${formTemplate}
+  </div>`;
 
   const template = `<header class="header">${headerBackTemplate}</header>
-${rulesTemplate}`;
+    ${rulesTemplate}`;
 
   const rulesElement = getElementFromTemplate(template);
   const formElement = rulesElement.querySelector('.rules__form');
