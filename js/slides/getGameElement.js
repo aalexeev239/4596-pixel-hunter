@@ -6,7 +6,7 @@ import renderGameHeader from '../templates/renderGameHeader';
 import renderStats from '../templates/renderStats';
 import renderQuestion from '../templates/renderQuestion';
 import getStatsElement from './getStatsElement';
-import statsData from '../fixtures/statsData';
+import statsData from '../data/stats-data';
 
 
 const getGameElement = (data, questionCursor) => {

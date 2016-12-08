@@ -2,7 +2,7 @@ import getElementFromTemplate from '../utils/getElementFromTemplate';
 import renderSlide from '../renderSlide';
 import greetingTemplate from '../templates/greeting';
 import getRulesElement from './getRulesElement';
-import rulesData from '../fixtures/rulesData';
+import rulesData from '../data/rules-data';
 
 const getGreetingElement = () => {
   const greetingElement = getElementFromTemplate(greetingTemplate);
