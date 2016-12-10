@@ -3,7 +3,7 @@ import pluralize from '../utils/pluralizeNoun_ru';
 import renderSlide from '../renderSlide';
 import headerBackTemplate from '../templates/headerBack';
 import getGameElement from './getGameElement';
-import gameData from '../fixtures/gameData';
+import gameData from '../data/game-data';
 
 const getRulesElement = ({attempts, attemptTimeInSec, lives}) => {
 
