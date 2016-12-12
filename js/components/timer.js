@@ -1,10 +1,9 @@
 import {timer as timerConfig} from '../config';
 
-const msPerLevel = timerConfig.SECONDS_PER_LEVEL * 1000;
-
 export default class Timer {
 
-  constructor(onTick, onFailure) {
+  constructor(onTick, onFailure, secPerLevel) {
+    this.msPerLevel = (secPerLevel || timerConfig.SECONDS_PER_LEVEL) * 1000;
 
     this.onTick = onTick;
     this.onFailure = onFailure;
@@ -17,6 +16,8 @@ export default class Timer {
     this._tickInterval = setInterval(() => {
       this._tick();
     }, 1000);
+
+    this._tick();
   }
 
   stop() {
@@ -26,7 +27,7 @@ export default class Timer {
   _tick() {
     const now = new Date();
 
-    if (now - this._startTime >= msPerLevel) {
+    if (now - this._startTime <= this.msPerLevel) {
       this.onTick();
     } else {
       this.stop();
