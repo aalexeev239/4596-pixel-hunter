@@ -1,12 +1,15 @@
 import questionTypes from '../constants/questionTypes';
 import answerValues from '../constants/answerValues';
 
+export const livesState = {
+  left: 2,
+  total: 3
+};
+
+
+
 const data = {
   time: 'NN',
-  lives: {
-    left: 2,
-    total: 3
-  },
   questions: [
     {
       type: questionTypes.GUESS_EVERY_OPTION,

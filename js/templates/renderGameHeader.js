@@ -1,6 +1,6 @@
 import headerBackTemplate from './headerBack';
 
-const func = ({time, lives: {left, total}}) => {
+const func = ({time, livesState: {left, total}}) => {
   const diff = total - left;
 
   const heartsArrayTemplate = [...Array(total)].map((life, i) => `

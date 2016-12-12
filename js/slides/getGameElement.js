@@ -7,10 +7,11 @@ import renderStats from '../templates/renderStats';
 import renderQuestion from '../templates/renderQuestion';
 import getStatsElement from './getStatsElement';
 import statsData from '../data/stats-data';
+import {livesState} from '../data/game-data';
 
 
 const getGameElement = (data, questionCursor) => {
-  const {time, lives, answers, questions} = data;
+  const {time, answers, questions} = data;
   const currentQuestion = questions[questionCursor];
 
   if (!currentQuestion) {
@@ -18,7 +19,7 @@ const getGameElement = (data, questionCursor) => {
   }
 
   const template = `
-    ${renderGameHeader({time, lives})}
+    ${renderGameHeader({time, livesState})}
     <div class="game">
       ${renderQuestion(currentQuestion)}
       <div class="stats">
