@@ -1,11 +1,7 @@
 import questionTypes from '../constants/questionTypes';
 import answerValues from '../constants/answerValues';
 
-export const livesState = {
-  left: 2,
-  total: 3
-};
-
+export const livesState = 2;
 
 
 const data = {
