@@ -5,35 +5,7 @@ const testConfig = {
   SECONDS_PER_LEVEL: 5
 };
 
-const noop = function () {
-};
-
-const getEmptyTimer = () => new Timer(noop, noop, testConfig.SECONDS_PER_LEVEL);
-
 describe('Timer', function () {
-  describe('#constructor', function () {
-    it('should contain onTick callback', function () {
-      const timer = new Timer(noop);
-      // duck typing
-      assert(typeof timer.onTick === 'function');
-    });
-
-    it('should contain onFailure callback', function () {
-      const timer = new Timer(noop, noop);
-      // duck typing
-      assert(typeof timer.onFailure === 'function');
-    });
-  });
-
-  it('should contain start()', function () {
-    const timer = getEmptyTimer();
-    assert(typeof timer.start === 'function');
-  });
-
-  it('should contain stop()', function () {
-    const timer = getEmptyTimer();
-    assert(typeof timer.stop === 'function');
-  });
 
   it('should fire tick every second', function (done) {
     const timeToEnd = testConfig.SECONDS_PER_LEVEL * 1000 + 100;
