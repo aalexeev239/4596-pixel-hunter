@@ -1,6 +1,6 @@
 import questionTypes from '../constants/questionTypes';
 
-const correctAnswers = [
+export const correctAnswers = [
   ['paint', 'photo'],
   'photo',
   'Option 1',
@@ -13,7 +13,7 @@ const correctAnswers = [
   ['paint', 'photo']
 ];
 
-const questions = [
+export const questions = [
   {
     type: questionTypes.GUESS_EVERY_OPTION,
     options: [
@@ -240,10 +240,7 @@ const questions = [
   }
 ];
 
-const data = {
-  time: 'NN',
+export default {
   questions,
   correctAnswers
 };
-
-export default data;
