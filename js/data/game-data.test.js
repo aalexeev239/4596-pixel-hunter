@@ -3,12 +3,16 @@ import data from './game-data';
 import questionTypes from '../constants/questionTypes';
 
 
-describe('data', function () {
-  it('should contain 10 questions', function () {
+describe('data', () => {
+  it('should contain 10 questions', () => {
     assert.equal(data.questions.length, 10);
   });
 
-  it('should contain 3 types of questions', function () {
+  it('should contain equal quantity of answers', () => {
+    assert(data.questions.length === data.answers.length);
+  });
+
+  it('should contain 3 types of questions', () => {
     //collect all question types
     let questionSet = new Set();
     data.questions.forEach(q => {
@@ -28,4 +32,29 @@ describe('data', function () {
 
     assert(res);
   });
+
+  it('should contain corresponding types of answers', () => {
+    const validateChoise = (answer) => (answer === 'photo' || answer === 'paint');
+
+    const res = data.answers.every((answer, i) => {
+      const question = data.questions[i];
+
+      switch (question.type) {
+        case questionTypes.FIND_PAINT:
+          return question.options.filter(o => o.image.title === answer).length > 0;
+
+        case questionTypes.GUESS_SINGLE_OPTION:
+          return validateChoise(answer);
+
+        case questionTypes.GUESS_EVERY_OPTION:
+          return Array.isArray(answer) &&
+            answer.length === question.options.length &&
+            answer.every(validateChoise);
+      }
+    });
+
+    assert(res);
+  });
+
+
 });

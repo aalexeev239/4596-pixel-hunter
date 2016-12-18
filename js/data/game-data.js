@@ -12,6 +12,19 @@ const getInitialState = () => {
   }
 };
 
+const answers = [
+  ['paint', 'photo'],
+  'photo',
+  'Option 1',
+  ['paint', 'photo'],
+  'photo',
+  'Option 1',
+  ['paint', 'photo'],
+  'photo',
+  'Option 1',
+  ['paint', 'photo']
+];
+
 const questions = [
   {
     type: questionTypes.GUESS_EVERY_OPTION,
@@ -63,7 +76,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 2',
           width: 304,
           height: 455
         },
@@ -72,7 +85,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 3',
           width: 304,
           height: 455
         },
@@ -130,7 +143,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 2',
           width: 304,
           height: 455
         },
@@ -139,7 +152,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 3',
           width: 304,
           height: 455
         },
@@ -197,7 +210,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 2',
           width: 304,
           height: 455
         },
@@ -206,7 +219,7 @@ const questions = [
       {
         image: {
           url: 'http://placehold.it/304x455',
-          title: 'Option 1',
+          title: 'Option 3',
           width: 304,
           height: 455
         },
@@ -240,21 +253,11 @@ const questions = [
 ];
 
 
+
 const data = {
   time: 'NN',
   questions,
-  answers: [
-    {value: answerValues.WRONG},
-    {value: answerValues.SLOW},
-    {value: answerValues.FAST},
-    {value: answerValues.CORRECT},
-    {value: answerValues.WRONG},
-    {value: answerValues.UNKNOWN},
-    {value: answerValues.SLOW},
-    {value: answerValues.UNKNOWN},
-    {value: answerValues.FAST},
-    {value: answerValues.UNKNOWN}
-  ]
+  answers
 };
 
 export default data;
