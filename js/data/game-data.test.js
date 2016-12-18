@@ -13,10 +13,10 @@ describe('data', () => {
   });
 
   it('should contain 3 types of questions', () => {
-    //collect all question types
+    // collect all question types
     let questionSet = new Set();
-    data.questions.forEach(q => {
-      questionSet.add(q.type)
+    data.questions.forEach((q) => {
+      questionSet.add(q.type);
     });
     if (questionSet.size !== 3) {
       assert(false);
@@ -41,7 +41,7 @@ describe('data', () => {
 
       switch (question.type) {
         case questionTypes.FIND_PAINT:
-          return question.options.filter(o => o.image.title === answer).length > 0;
+          return question.options.filter((o) => o.image.title === answer).length > 0;
 
         case questionTypes.GUESS_SINGLE_OPTION:
           return validateChoise(answer);
@@ -51,6 +51,8 @@ describe('data', () => {
             answer.length === question.options.length &&
             answer.every(validateChoise);
       }
+
+      return false;
     });
 
     assert(res);

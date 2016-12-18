@@ -1,16 +1,4 @@
 import questionTypes from '../constants/questionTypes';
-import answerValues from '../constants/answerValues';
-import config from '../config';
-
-
-export const livesState = 2;
-
-const getInitialState = () => {
-  return {
-    lives: config.lives.TOTAL,
-    answers: []
-  }
-};
 
 const correctAnswers = [
   ['paint', 'photo'],
@@ -251,8 +239,6 @@ const questions = [
     ]
   }
 ];
-
-
 
 const data = {
   time: 'NN',

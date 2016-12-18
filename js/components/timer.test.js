@@ -1,9 +1,9 @@
 // import assert from 'assert';
-import Timer from './timer';
+// import Timer from './timer';
 
-const testConfig = {
-  SECONDS_PER_LEVEL: 5
-};
+// const testConfig = {
+//   SECONDS_PER_LEVEL: 5
+// };
 
 // describe('Timer', function () {
 //

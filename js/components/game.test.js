@@ -1,6 +1,6 @@
 import assert from 'assert';
-import game from './game';
-import {data} from '../data/game-data';
+import {setLives, setQuestion, setAnswer, calculateAnswers} from './game';
+import data from '../data/game-data';
 import config from '../config';
 import answerValues from '../constants/answerValues';
 
@@ -121,13 +121,10 @@ describe('Game', function () {
       });
 
       it('should throw an Error if current lives is 0', () => {
-        assert.throws(setAnswer(
-          Object.assign({}, initialState, {lives: 0}),
-          {
-            answer: 'qwert',
-            time: 10
-          }
-        ));
+        assert.throws(setAnswer(Object.assign({}, initialState, {lives: 0}), {
+          answer: 'qwert',
+          time: 10
+        }));
       });
     });
   });
@@ -136,70 +133,52 @@ describe('Game', function () {
     describe('Calculating', () => {
 
       it('should give 100 points on correct answer', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [answerValues.CORRECT],
-            lives: 0
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [answerValues.CORRECT],
+          lives: 0
+        });
         assert.equal(calculateAnswers(state), 100);
       });
 
       it('should sum points on answers', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [answerValues.CORRECT, answerValues.CORRECT],
-            lives: 0
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [answerValues.CORRECT, answerValues.CORRECT],
+          lives: 0
+        });
         assert.equal(calculateAnswers(state), 200);
       });
 
       it('should add 50 points on fast answer', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [answerValues.FAST],
-            lives: 0
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [answerValues.FAST],
+          lives: 0
+        });
         assert.equal(calculateAnswers(state), 150);
       });
 
       it('should decrease 50 points on slow answer', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [answerValues.SLOW],
-            lives: 0
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [answerValues.SLOW],
+          lives: 0
+        });
         assert.equal(calculateAnswers(state), 50);
       });
 
       it('should add 50 points on each live', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [answerValues.CORRECT],
-            lives: 3
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [answerValues.CORRECT],
+          lives: 3
+        });
         assert.equal(calculateAnswers(state), 250);
       });
     });
 
     describe('Failure', () => {
       it('should throw an error if extra values passed', () => {
-        const state = Object.assign({},
-          initialState,
-          {
-            answers: [...Array(data.correctAnswers.length + 1)],
-            lives: 0
-          }
-        );
+        const state = Object.assign({}, initialState, {
+          answers: [...Array(data.correctAnswers.length + 1)],
+          lives: 0
+        });
         assert.throws(calculateAnswers(state));
       });
     });
