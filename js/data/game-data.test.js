@@ -9,7 +9,7 @@ describe('data', () => {
   });
 
   it('should contain equal quantity of answers', () => {
-    assert(data.questions.length === data.answers.length);
+    assert(data.questions.length === data.correctAnswers.length);
   });
 
   it('should contain 3 types of questions', () => {
@@ -36,7 +36,7 @@ describe('data', () => {
   it('should contain corresponding types of answers', () => {
     const validateChoise = (answer) => (answer === 'photo' || answer === 'paint');
 
-    const res = data.answers.every((answer, i) => {
+    const res = data.correctAnswers.every((answer, i) => {
       const question = data.questions[i];
 
       switch (question.type) {

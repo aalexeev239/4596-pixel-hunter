@@ -12,7 +12,7 @@ const getInitialState = () => {
   }
 };
 
-const answers = [
+const correctAnswers = [
   ['paint', 'photo'],
   'photo',
   'Option 1',
@@ -257,7 +257,7 @@ const questions = [
 const data = {
   time: 'NN',
   questions,
-  answers
+  correctAnswers
 };
 
 export default data;
