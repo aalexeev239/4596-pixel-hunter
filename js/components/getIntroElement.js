@@ -1,5 +1,5 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
-import renderSlide from '../renderSlide';
+import renderSlide from '../utils/renderSlide';
 import introTemplate from '../templates/intro';
 import getGreetingElement from './getGreetingElement';
 

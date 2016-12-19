@@ -18,7 +18,7 @@ export const questions = [
     type: questionTypes.GUESS_EVERY_OPTION,
     options: [
       {
-        name: 'question1',
+        name: 'question2',
         image: {
           url: 'http://placehold.it/468x458',
           title: 'Option 1',
@@ -27,7 +27,7 @@ export const questions = [
         }
       },
       {
-        name: 'question2',
+        name: 'question1',
         image: {
           url: 'http://placehold.it/468x458',
           title: 'Option 2',

@@ -3,6 +3,10 @@ import questionTypes from '../constants/questionTypes';
 import isInteger from '../utils/isInteger';
 import {lives as livesConfig, timer as timerConfig} from '../config';
 import {questions, correctAnswers} from '../data/game-data';
+import renderSlide from '../utils/renderSlide';
+import getGameElement from './getGameElement';
+import getStatsElement from './getStatsElement';
+import statsData from '../data/stats-data';
 
 
 export const setLives = (state, lives) => {
@@ -74,7 +78,7 @@ export const setAnswer = (state, {answer, time}) => {
 
   if (time > timerConfig.SECONDS_PER_LEVEL) {
     answers[currentQuestion] = answerValues.UNKNOWN;
-    return Object.assign({}, state, answers, {lives: lives - 1});
+    return Object.assign({}, state, {answers}, {lives: lives - 1});
   }
 
   if (validateAnswer(answer, currentQuestion)) {
@@ -92,7 +96,7 @@ export const setAnswer = (state, {answer, time}) => {
 
   answers[currentQuestion] = res;
 
-  return Object.assign({}, state, answers, {lives: resLives});
+  return Object.assign({}, state, {answers}, {lives: resLives});
 };
 
 const answersMap = new Map()
@@ -113,4 +117,19 @@ export const calculateStats = ({answers, lives}) => {
   res += lives * 50;
 
   return res;
+};
+
+export const initGame = (state) => {
+  state = setQuestion(state, state.currentQuestion);
+  renderSlide(getGameElement(state, (answer) => {
+    state = setAnswer(state, answer);
+    console.log('--- state', state);
+    if (state.lives > 0 && state.currentQuestion < questions.length - 1) {
+      state.currentQuestion = state.currentQuestion + 1;
+      initGame(state);
+    } else {
+      renderSlide(getStatsElement(statsData));
+    }
+  }));
+
 };

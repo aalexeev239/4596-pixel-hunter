@@ -1,89 +1,75 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import getClosestNode from '../utils/getClosestNode';
-import renderSlide from '../renderSlide';
 import questionTypes from '../constants/questionTypes';
 import renderGameHeader from '../templates/renderGameHeader';
-import renderStats from '../templates/renderStats';
 import renderQuestion from '../templates/renderQuestion';
-import getStatsElement from './getStatsElement';
-import statsData from '../data/stats-data';
-import {livesState} from '../data/game-data';
+import renderStats from '../templates/renderStats';
+import {questions} from '../data/game-data';
 
 
-const getGameElement = (data, questionCursor) => {
-  const {time, answers, questions} = data;
-  const currentQuestion = questions[questionCursor];
+const getGameElement = (state, onAnswer) => {
+    const {lives, currentQuestion, answers} = state;
+    const question = questions[currentQuestion];
 
-  if (!currentQuestion) {
-    return getElementFromTemplate('Error! Question not found.');
-  }
-
-  const template = `
-    ${renderGameHeader({time, livesState})}
+    const template = `
+    ${renderGameHeader(lives)}
     <div class="game">
-      ${renderQuestion(currentQuestion)}
+      ${renderQuestion(question)}
       <div class="stats">
         ${renderStats(answers)}
       </div>
     </div>
   `;
 
-  const element = getElementFromTemplate(template);
-  let answerElements = [];
-  let levelOptions = [];
+    const element = getElementFromTemplate(template);
+    // const timerElement = element.querySelector('.game__timer');
+    const form = element.querySelector('form');
+    let formNameSet;
+    let formName;
+    formNameSet = new Set();
+    for (let elem of form.elements) {
+      formNameSet.add(elem.name);
+      formName = elem.name;
+    }
 
-  switch (currentQuestion.type) {
-    case questionTypes.GUESS_SINGLE_OPTION:
-      answerElements = Array.from(element.querySelectorAll('.game__answer'));
-      break;
-    case questionTypes.GUESS_EVERY_OPTION:
-      levelOptions = Array.from(element.querySelectorAll('.game__option'));
-      answerElements = Array.from(element.querySelectorAll('.game__answer'));
-      break;
-    case questionTypes.FIND_PAINT:
-      answerElements = Array.from(element.querySelectorAll('.game__option'));
-      break;
+
+    form.addEventListener('change', function (ev) {
+      ev.preventDefault();
+
+      if (question.type === questionTypes.GUESS_EVERY_OPTION) {
+        let input = ev.target;
+        Array.prototype.forEach.call(form[input.name], (elem) => {
+            elem.disabled = true;
+          }
+        );
+        for (let name of formNameSet) {
+          if (!form[name].value) {
+            return;
+          }
+        }
+
+        let answerArray = [];
+
+        for (let name of formNameSet) {
+          answerArray.push(form[name].value);
+        }
+
+        onAnswer({
+          answer: answerArray,
+          time: 10
+        });
+      } else {
+        onAnswer({
+          answer: form[formName].value,
+          time: 10
+        });
+      }
+    });
+
+// answerElements.forEach((elem) => elem.addEventListener('click', onClick));
+
+    return element;
   }
-
-  const onClick = (ev) => {
-    ev.preventDefault();
-
-    if (currentQuestion.type === questionTypes.GUESS_EVERY_OPTION) {
-      // select current image
-      const currentOption = getClosestNode(ev.target, 'game__option');
-
-      if (!currentOption) {
-        return;
-      }
-
-      // remove listeners
-      Array.from(currentOption.querySelectorAll('.game__answer')).forEach((elem) => elem.removeEventListener('click', onClick));
-
-      // remove current image from array
-      if (~levelOptions.indexOf(currentOption)) {
-        levelOptions.splice(levelOptions.indexOf(currentOption), 1);
-      }
-      // if there are images to click
-      if (levelOptions.length) {
-        return;
-      }
-    }
-
-    goNext();
-  };
-
-  const goNext = () => {
-
-    if (questionCursor < questions.length - 1) {
-      renderSlide(getGameElement(data, questionCursor + 1));
-    } else {
-      renderSlide(getStatsElement(statsData));
-    }
-  };
-
-  answerElements.forEach((elem) => elem.addEventListener('click', onClick));
-
-  return element;
-};
+  ;
 
 export default getGameElement;
