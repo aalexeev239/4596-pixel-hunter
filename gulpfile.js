@@ -108,7 +108,7 @@ gulp.task('serve', ['assemble'], function () {
 
   gulp.watch('sass/**/*.{scss,sass}', ['style']);
   gulp.watch('*.html', ['copy-html']);
-  gulp.watch('js/**/*.js', ['scripts', 'test', server.reload]);
+  gulp.watch('js/**/*.js', ['scripts', server.reload]);
 });
 
 gulp.task('assemble', ['clean'], function () {
