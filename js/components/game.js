@@ -1,9 +1,9 @@
 import {answerTypes} from '../constants/answerTypes';
+import {scores} from '../constants/scores';
 import questionTypes from '../constants/questionTypes';
 import isInteger from '../utils/isInteger';
 import {lives as livesConfig, timer as timerConfig} from '../config';
 import {questions, correctAnswers} from '../data/game-data';
-
 
 export const setLives = (state, lives) => {
   if (!isInteger(lives)) {
@@ -94,69 +94,48 @@ export const setAnswer = (state, {answer, time}) => {
   return Object.assign({}, state, {answers}, {lives: resultLives});
 };
 
-const answersMap = new Map()
-  .set(answerTypes.CORRECT, 100)
-  .set(answerTypes.FAST, 150)
-  .set(answerTypes.SLOW, 50);
-
-export const calculateStats = ({answers, lives}) => {
-
-  if (answers.length > correctAnswers.length) {
-    throw new RangeError('answers are too big');
-  }
-
-  let res = answers.reduce((sum, val) => {
-    return sum + (answersMap.get(val) || 0);
-  }, 0);
-
-  res += lives * 50;
-
-  return res;
-};
-
 const correctAnswersList = [answerTypes.CORRECT, answerTypes.FAST, answerTypes.SLOW];
+
 const isAnswerCorrect = (answer) => {
   return (~correctAnswersList.indexOf(answer));
 };
 
-
-
 const getAdditionals = (answers, lives) => {
   let fastAnswersCount = answers.filter((a) => a === answerTypes.FAST).length;
-  let slowAnswersCount = answers.filter((a) => a === answerTypes.FAST).length;
-  let res = [];
+  let slowAnswersCount = answers.filter((a) => a === answerTypes.SLOW).length;
+  let result = [];
 
   if (fastAnswersCount) {
-    res.push({
+    result.push({
       title: 'Бонус за скорость',
       extra: fastAnswersCount,
       icon: 'fast',
-      points: 50,
-      total: fastAnswersCount * 50
+      points: Math.abs(scores.FAST),
+      total: fastAnswersCount * scores.FAST
     });
   }
 
   if (lives) {
-    res.push({
+    result.push({
       title: 'Бонус за жизни',
       extra: lives,
       icon: 'heart',
-      points: 50,
-      total: lives * 50
+      points: Math.abs(scores.LIVE),
+      total: lives * scores.LIVE
     });
   }
 
   if (slowAnswersCount) {
-    res.push({
+    result.push({
       title: 'Штраф за медлительность',
       extra: slowAnswersCount,
       icon: 'fast',
-      points: 50,
-      total: -slowAnswersCount * 50
+      points: Math.abs(scores.SLOW),
+      total: slowAnswersCount * scores.SLOW
     });
   }
 
-  return res;
+  return result;
 };
 
 export const getStatsData = (state) => {
@@ -167,11 +146,16 @@ export const getStatsData = (state) => {
   let total = null;
   let additionals = [];
   let final = null;
+
+  if (answers.length > questions.length) {
+    throw new RangeError('too many answers');
+  }
+
   if (lives > 0 && currentQuestion === questions.length - 1) {
     pageTitle = 'Победа!';
     isSuccess = true;
     points = 100; // WTF??????
-    total = answers.filter(isAnswerCorrect).length * 100;
+    total = answers.filter(isAnswerCorrect).length * scores.CORRECT;
     additionals = getAdditionals(answers, lives);
     final = total + additionals.reduce((acc, cur) => acc + cur.total, 0);
   }
