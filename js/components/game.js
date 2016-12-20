@@ -119,6 +119,81 @@ export const calculateStats = ({answers, lives}) => {
   return res;
 };
 
+const correctAnswersList = [answerValues.CORRECT, answerValues.FAST, answerValues.SLOW];
+const isAnswerCorrect = (answer) => {
+  return (~correctAnswersList.indexOf(answer));
+};
+
+const getAdditionals = (answers, lives) => {
+  let fastAnswersCount = answers.filter((a) => a === answerValues.FAST).length;
+  let slowAnswersCount = answers.filter((a) => a === answerValues.FAST).length;
+  let res = [];
+
+  if (fastAnswersCount) {
+    res.push({
+      title: 'Бонус за скорость',
+      extra: fastAnswersCount,
+      icon: 'fast',
+      points: 50,
+      total: fastAnswersCount * 50
+    })
+  }
+
+  if (lives) {
+    res.push({
+      title: 'Бонус за жизни',
+      extra: lives,
+      icon: 'heart',
+      points: 50,
+      total: lives * 50
+    });
+  }
+
+  if (slowAnswersCount) {
+    res.push({
+      title: 'Штраф за медлительность',
+      extra: slowAnswersCount,
+      icon: 'fast',
+      points: 50,
+      total: -slowAnswersCount * 50
+    })
+  }
+
+  return res;
+};
+
+const getStatsData = (state) => {
+  const {lives, answers, currentQuestion} = state;
+  let pageTitle = 'FAIL';
+  let isSuccess = false;
+  let points = null;
+  let total = null;
+  let additionals = [];
+  let final = null;
+  if (lives > 0 && currentQuestion === questions.length - 1) {
+    pageTitle = 'Победа!';
+    isSuccess = true;
+    points = 100; // WTF??????
+    total = answers.filter(isAnswerCorrect).length * 100;
+    additionals = getAdditionals(answers, lives);
+    final = total + additionals.reduce((acc, cur) => acc + cur.total, 0);
+
+  }
+
+  return {
+    pageTitle,
+    results: [{
+      answers,
+      isSuccess,
+      points,
+      total,
+      additionals,
+      final
+    }],
+
+  }
+};
+
 export const initGame = (state) => {
   state = setQuestion(state, state.currentQuestion);
   renderSlide(getGameElement(state, (answer) => {
@@ -128,8 +203,9 @@ export const initGame = (state) => {
       state.currentQuestion = state.currentQuestion + 1;
       initGame(state);
     } else {
-      renderSlide(getStatsElement(statsData));
+      renderSlide(getStatsElement(getStatsData(state)));
     }
   }));
-
 };
+
+

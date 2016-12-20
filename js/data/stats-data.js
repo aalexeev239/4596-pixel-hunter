@@ -61,7 +61,7 @@ const data = {
       points: null,
       total: null,
       additionals: [],
-      final: null,
+      final: null
     },
     {
       answers: [
