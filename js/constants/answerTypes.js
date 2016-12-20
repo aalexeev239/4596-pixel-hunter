@@ -5,4 +5,3 @@ export const answerTypes = {
   CORRECT: 'correct',
   UNKNOWN: 'unknown'
 };
-
