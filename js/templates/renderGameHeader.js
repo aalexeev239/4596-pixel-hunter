@@ -3,7 +3,7 @@ import {lives as livesConfig, timer as timerConfig} from '../config';
 
 
 const func = (lives) => {
-  const diff = lives.TOTAL - lives;
+  const diff = livesConfig.TOTAL - lives;
 
   const heartsArrayTemplate = [...Array(livesConfig.TOTAL)].map((life, i) => `
   <img src="img/heart__${i < diff ? 'empty' : 'full'}.svg" 
