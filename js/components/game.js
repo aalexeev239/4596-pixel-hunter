@@ -3,9 +3,6 @@ import questionTypes from '../constants/questionTypes';
 import isInteger from '../utils/isInteger';
 import {lives as livesConfig, timer as timerConfig} from '../config';
 import {questions, correctAnswers} from '../data/game-data';
-import renderSlide from '../utils/renderSlide';
-import getGameElement from './getGameElement';
-import getStatsElement from './getStatsElement';
 
 
 export const setLives = (state, lives) => {
@@ -160,7 +157,7 @@ const getAdditionals = (answers, lives) => {
   return res;
 };
 
-const getStatsData = (state) => {
+export const getStatsData = (state) => {
   const {lives, answers, currentQuestion} = state;
   let pageTitle = 'FAIL';
   let isSuccess = false;
@@ -189,19 +186,6 @@ const getStatsData = (state) => {
       final
     }]
   };
-};
-
-export const initGame = (state) => {
-  state = setQuestion(state, state.currentQuestion);
-  renderSlide(getGameElement(state, (answer) => {
-    state = setAnswer(state, answer);
-    if (state.lives > 0 && state.currentQuestion < questions.length - 1) {
-      state.currentQuestion = state.currentQuestion + 1;
-      initGame(state);
-    } else {
-      renderSlide(getStatsElement(getStatsData(state)));
-    }
-  }));
 };
 
 

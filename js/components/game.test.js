@@ -72,7 +72,7 @@ describe('Game', function () {
       it('should mark wrong answer as wrong', () => {
         const newState = setAnswer(initialState, {
           answer: 'qwert',
-          time: 0
+          time: 10
         });
 
         assert.equal(newState.answers[newState.currentQuestion], answerValues.WRONG);
