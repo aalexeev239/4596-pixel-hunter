@@ -2,7 +2,7 @@ import assert from 'assert';
 import {setLives, setQuestion, setAnswer, calculateStats} from './game';
 import data from '../data/game-data';
 import config from '../config';
-import answerValues from '../constants/answerValues';
+import {answerTypes} from '../constants/answerTypes';
 
 const initialState = {
   lives: 3,
@@ -75,7 +75,7 @@ describe('Game', function () {
           time: 10
         });
 
-        assert.equal(newState.answers[newState.currentQuestion], answerValues.WRONG);
+        assert.equal(newState.answers[newState.currentQuestion], answerTypes.WRONG);
       });
 
       it('should mark answer as unknown and decrease lives if time passed', () => {
@@ -84,7 +84,7 @@ describe('Game', function () {
           time: config.timer.SECONDS_PER_LEVEL + 10
         });
 
-        assert((newState.lives === initialState.lives - 1) && (newState.answers[newState.currentQuestion] === answerValues.UNKNOWN));
+        assert((newState.lives === initialState.lives - 1) && (newState.answers[newState.currentQuestion] === answerTypes.UNKNOWN));
       });
 
       it('should mark answer as fast if passed less then 10 secs', () => {
@@ -94,7 +94,7 @@ describe('Game', function () {
           time: 9
         });
 
-        assert.equal(newState.answers[newState.currentQuestion], answerValues.FAST);
+        assert.equal(newState.answers[newState.currentQuestion], answerTypes.FAST);
       });
 
 
@@ -105,7 +105,7 @@ describe('Game', function () {
           time: 21
         });
 
-        assert.equal(newState.answers[newState.currentQuestion], answerValues.SLOW);
+        assert.equal(newState.answers[newState.currentQuestion], answerTypes.SLOW);
       });
 
       it('should decrease lives when wrong answer passed', () => {
@@ -140,7 +140,7 @@ describe('Game', function () {
 
       it('should give 100 points on correct answer', () => {
         const state = Object.assign({}, initialState, {
-          answers: [answerValues.CORRECT],
+          answers: [answerTypes.CORRECT],
           lives: 0
         });
         assert.equal(calculateStats(state), 100);
@@ -148,7 +148,7 @@ describe('Game', function () {
 
       it('should sum points on answers', () => {
         const state = Object.assign({}, initialState, {
-          answers: [answerValues.CORRECT, answerValues.CORRECT],
+          answers: [answerTypes.CORRECT, answerTypes.CORRECT],
           lives: 0
         });
         assert.equal(calculateStats(state), 200);
@@ -156,7 +156,7 @@ describe('Game', function () {
 
       it('should add 50 points on fast answer', () => {
         const state = Object.assign({}, initialState, {
-          answers: [answerValues.FAST],
+          answers: [answerTypes.FAST],
           lives: 0
         });
         assert.equal(calculateStats(state), 150);
@@ -164,7 +164,7 @@ describe('Game', function () {
 
       it('should decrease 50 points on slow answer', () => {
         const state = Object.assign({}, initialState, {
-          answers: [answerValues.SLOW],
+          answers: [answerTypes.SLOW],
           lives: 0
         });
         assert.equal(calculateStats(state), 50);
@@ -172,7 +172,7 @@ describe('Game', function () {
 
       it('should add 50 points on each live', () => {
         const state = Object.assign({}, initialState, {
-          answers: [answerValues.CORRECT],
+          answers: [answerTypes.CORRECT],
           lives: 3
         });
         assert.equal(calculateStats(state), 250);
@@ -182,7 +182,7 @@ describe('Game', function () {
     describe('Failure', () => {
       it('should throw an error if extra values passed', () => {
         const state = Object.assign({}, initialState, {
-          answers: [...Array(data.correctAnswers.length + 1)].map(() => null),
+          answers: Array(data.correctAnswers.length + 1),
           lives: 0
         });
         assert.throws(() => calculateStats(state));

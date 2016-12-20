@@ -1,20 +1,20 @@
-import answerValues from '../constants/answerValues';
+import {answerTypes} from '../constants/answerTypes';
 
 const data = {
   pageTitle: 'Победа!',
   results: [
     {
       answers: [
-        {value: answerValues.WRONG},
-        {value: answerValues.SLOW},
-        {value: answerValues.FAST},
-        {value: answerValues.CORRECT},
-        {value: answerValues.WRONG},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.SLOW},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.FAST},
-        {value: answerValues.UNKNOWN}
+        {value: answerTypes.WRONG},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.FAST},
+        {value: answerTypes.CORRECT},
+        {value: answerTypes.WRONG},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.FAST},
+        {value: answerTypes.UNKNOWN}
       ],
       isSuccess: true,
       points: 100,
@@ -46,16 +46,16 @@ const data = {
     },
     {
       answers: [
-        {value: answerValues.WRONG},
-        {value: answerValues.SLOW},
-        {value: answerValues.FAST},
-        {value: answerValues.CORRECT},
-        {value: answerValues.WRONG},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.SLOW},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.FAST},
-        {value: answerValues.UNKNOWN}
+        {value: answerTypes.WRONG},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.FAST},
+        {value: answerTypes.CORRECT},
+        {value: answerTypes.WRONG},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.FAST},
+        {value: answerTypes.UNKNOWN}
       ],
       isSuccess: false,
       points: null,
@@ -65,16 +65,16 @@ const data = {
     },
     {
       answers: [
-        {value: answerValues.WRONG},
-        {value: answerValues.SLOW},
-        {value: answerValues.FAST},
-        {value: answerValues.CORRECT},
-        {value: answerValues.WRONG},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.SLOW},
-        {value: answerValues.UNKNOWN},
-        {value: answerValues.FAST},
-        {value: answerValues.UNKNOWN}
+        {value: answerTypes.WRONG},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.FAST},
+        {value: answerTypes.CORRECT},
+        {value: answerTypes.WRONG},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.SLOW},
+        {value: answerTypes.UNKNOWN},
+        {value: answerTypes.FAST},
+        {value: answerTypes.UNKNOWN}
       ],
       isSuccess: true,
       points: 100,

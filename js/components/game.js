@@ -1,4 +1,4 @@
-import answerValues from '../constants/answerValues';
+import {answerTypes} from '../constants/answerTypes';
 import questionTypes from '../constants/questionTypes';
 import isInteger from '../utils/isInteger';
 import {lives as livesConfig, timer as timerConfig} from '../config';
@@ -57,8 +57,8 @@ const validateAnswer = (answer, index) => {
 
 export const setAnswer = (state, {answer, time}) => {
   const {answers, currentQuestion, lives} = state;
-  let res;
-  let resLives = lives;
+  let resultAnswer;
+  let resultLives = lives;
 
   if (lives === 0) {
     throw new RangeError('lives should be positive');
@@ -69,35 +69,35 @@ export const setAnswer = (state, {answer, time}) => {
   }
 
   if (time > timerConfig.SECONDS_PER_LEVEL) {
-    answers[currentQuestion] = answerValues.UNKNOWN;
+    answers[currentQuestion] = answerTypes.UNKNOWN;
     return Object.assign({}, state, {answers}, {lives: lives - 1});
   }
 
   if (!answer || time === 0) {
-    res = answerValues.UNKNOWN;
-    resLives = lives - 1;
+    resultAnswer = answerTypes.UNKNOWN;
+    resultLives = lives - 1;
   } else if (validateAnswer(answer, currentQuestion)) {
     if (time < 10) {
-      res = answerValues.FAST;
+      resultAnswer = answerTypes.FAST;
     } else if (time > 20) {
-      res = answerValues.SLOW;
+      resultAnswer = answerTypes.SLOW;
     } else {
-      res = answerValues.CORRECT;
+      resultAnswer = answerTypes.CORRECT;
     }
   } else {
-    res = answerValues.WRONG;
-    resLives = lives - 1;
+    resultAnswer = answerTypes.WRONG;
+    resultLives = lives - 1;
   }
 
-  answers[currentQuestion] = res;
+  answers[currentQuestion] = resultAnswer;
 
-  return Object.assign({}, state, {answers}, {lives: resLives});
+  return Object.assign({}, state, {answers}, {lives: resultLives});
 };
 
 const answersMap = new Map()
-  .set(answerValues.CORRECT, 100)
-  .set(answerValues.FAST, 150)
-  .set(answerValues.SLOW, 50);
+  .set(answerTypes.CORRECT, 100)
+  .set(answerTypes.FAST, 150)
+  .set(answerTypes.SLOW, 50);
 
 export const calculateStats = ({answers, lives}) => {
 
@@ -114,14 +114,16 @@ export const calculateStats = ({answers, lives}) => {
   return res;
 };
 
-const correctAnswersList = [answerValues.CORRECT, answerValues.FAST, answerValues.SLOW];
+const correctAnswersList = [answerTypes.CORRECT, answerTypes.FAST, answerTypes.SLOW];
 const isAnswerCorrect = (answer) => {
   return (~correctAnswersList.indexOf(answer));
 };
 
+
+
 const getAdditionals = (answers, lives) => {
-  let fastAnswersCount = answers.filter((a) => a === answerValues.FAST).length;
-  let slowAnswersCount = answers.filter((a) => a === answerValues.FAST).length;
+  let fastAnswersCount = answers.filter((a) => a === answerTypes.FAST).length;
+  let slowAnswersCount = answers.filter((a) => a === answerTypes.FAST).length;
   let res = [];
 
   if (fastAnswersCount) {
@@ -172,7 +174,6 @@ export const getStatsData = (state) => {
     total = answers.filter(isAnswerCorrect).length * 100;
     additionals = getAdditionals(answers, lives);
     final = total + additionals.reduce((acc, cur) => acc + cur.total, 0);
-
   }
 
   return {
