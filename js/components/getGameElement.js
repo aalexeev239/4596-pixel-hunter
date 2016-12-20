@@ -5,6 +5,7 @@ import renderGameHeader from '../templates/renderGameHeader';
 import renderQuestion from '../templates/renderQuestion';
 import renderStats from '../templates/renderStats';
 import {questions} from '../data/game-data';
+import Timer from '../components/timer';
 
 
 const getGameElement = (state, onAnswer) => {
@@ -22,7 +23,16 @@ const getGameElement = (state, onAnswer) => {
   `;
 
     const element = getElementFromTemplate(template);
-    // const timerElement = element.querySelector('.game__timer');
+    const timerElement = element.querySelector('.game__timer');
+    const timer = new Timer(() => {
+      timerElement.textContent = timer.getTime() + 1;
+    }, () => {
+      onAnswer({
+        answer: null,
+        time: 0
+      });
+    });
+    timer.start();
     const form = element.querySelector('form');
     let formNameSet;
     let formName;
@@ -53,15 +63,14 @@ const getGameElement = (state, onAnswer) => {
         for (let name of formNameSet) {
           answerArray.push(form[name].value);
         }
-
         onAnswer({
           answer: answerArray,
-          time: 10
+          time: timer.stop()
         });
       } else {
         onAnswer({
           answer: form[formName].value,
-          time: 10
+          time: timer.stop()
         });
       }
     });

@@ -3,8 +3,8 @@ import {timer as timerConfig} from '../config';
 export default class Timer {
 
   constructor(onTick, onFailure, secPerLevel) {
-    this.msPerLevel = (secPerLevel || timerConfig.SECONDS_PER_LEVEL) * 1000;
-    this._value = this.msPerLevel;
+    this._value = secPerLevel || timerConfig.SECONDS_PER_LEVEL;
+    this.msPerLevel = (this._value) * 1000;
 
     this.onTick = onTick;
     this.onFailure = onFailure;
@@ -23,9 +23,10 @@ export default class Timer {
 
   stop() {
     clearInterval(this._tickInterval);
+    return this._value;
   }
 
-  getCurrentValue() {
+  getTime() {
     return this._value;
   }
 

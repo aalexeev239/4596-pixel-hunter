@@ -68,10 +68,6 @@ export const setAnswer = (state, {answer, time}) => {
     throw new RangeError('lives should be positive');
   }
 
-  if (!answer) {
-    throw new TypeError('answer is incorrect');
-  }
-
   if (time < 0) {
     throw new RangeError('answer time should be non-negative');
   }
@@ -81,7 +77,10 @@ export const setAnswer = (state, {answer, time}) => {
     return Object.assign({}, state, {answers}, {lives: lives - 1});
   }
 
-  if (validateAnswer(answer, currentQuestion)) {
+  if (!answer || time === 0) {
+    res = answerValues.UNKNOWN;
+    resLives = lives - 1;
+  } else if (validateAnswer(answer, currentQuestion)) {
     if (time < 10) {
       res = answerValues.FAST;
     } else if (time > 20) {
@@ -198,7 +197,6 @@ export const initGame = (state) => {
   state = setQuestion(state, state.currentQuestion);
   renderSlide(getGameElement(state, (answer) => {
     state = setAnswer(state, answer);
-    console.log('--- state', state);
     if (state.lives > 0 && state.currentQuestion < questions.length - 1) {
       state.currentQuestion = state.currentQuestion + 1;
       initGame(state);

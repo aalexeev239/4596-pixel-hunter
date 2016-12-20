@@ -119,13 +119,6 @@ describe('Game', function () {
     });
 
     describe('Failure', () => {
-      it('should throw an Error if null answer passed', () => {
-        assert.throws(() => setAnswer(initialState, {
-          answer: null,
-          time: 21
-        }));
-      });
-
       it('should throw an Error if negative time value passed', () => {
         assert.throws(() => setAnswer(initialState, {
           answer: 'qwert',
