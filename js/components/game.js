@@ -6,7 +6,6 @@ import {questions, correctAnswers} from '../data/game-data';
 import renderSlide from '../utils/renderSlide';
 import getGameElement from './getGameElement';
 import getStatsElement from './getStatsElement';
-import statsData from '../data/stats-data';
 
 
 export const setLives = (state, lives) => {
@@ -135,7 +134,7 @@ const getAdditionals = (answers, lives) => {
       icon: 'fast',
       points: 50,
       total: fastAnswersCount * 50
-    })
+    });
   }
 
   if (lives) {
@@ -155,7 +154,7 @@ const getAdditionals = (answers, lives) => {
       icon: 'fast',
       points: 50,
       total: -slowAnswersCount * 50
-    })
+    });
   }
 
   return res;
@@ -188,9 +187,8 @@ const getStatsData = (state) => {
       total,
       additionals,
       final
-    }],
-
-  }
+    }]
+  };
 };
 
 export const initGame = (state) => {

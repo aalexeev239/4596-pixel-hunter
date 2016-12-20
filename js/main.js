@@ -1,5 +1,5 @@
-import getIntroElement from './components/getIntroElement';
-import renderSlide from './utils/renderSlide';
+// import getIntroElement from './components/getIntroElement';
+// import renderSlide from './utils/renderSlide';
 import {initGame} from './components/game';
 
 
