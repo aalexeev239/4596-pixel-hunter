@@ -1,5 +1,5 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
-import renderSlide from '../renderSlide';
+import renderSlide from '../utils/renderSlide';
 import greetingTemplate from '../templates/greeting';
 import getRulesElement from './getRulesElement';
 import rulesData from '../data/rules-data';

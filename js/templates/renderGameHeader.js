@@ -1,9 +1,11 @@
 import headerBackTemplate from './headerBack';
+import {lives as livesConfig, timer as timerConfig} from '../config';
 
-const func = ({time, lives: {left, total}}) => {
-  const diff = total - left;
 
-  const heartsArrayTemplate = [...Array(total)].map((life, i) => `
+const func = (lives) => {
+  const diff = livesConfig.TOTAL - lives;
+
+  const heartsArrayTemplate = [...Array(livesConfig.TOTAL)].map((life, i) => `
   <img src="img/heart__${i < diff ? 'empty' : 'full'}.svg" 
   class="game__heart" alt="Life" width="32" height="32">`);
 
@@ -13,7 +15,7 @@ const func = ({time, lives: {left, total}}) => {
 
   return `<header class="header">
     ${headerBackTemplate}
-    <h1 class="game__timer">${time}</h1>
+    <h1 class="game__timer">${timerConfig.SECONDS_PER_LEVEL}</h1>
     ${livesTemplate}
   </header>`;
 };
