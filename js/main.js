@@ -1,4 +1,3 @@
-import getIntroElement from './slides/getIntroElement';
-import renderSlide from './renderSlide';
+import Application from './application';
 
-renderSlide(getIntroElement());
+Application.showIntro();
