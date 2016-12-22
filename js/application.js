@@ -1,4 +1,5 @@
 import createIntroScreen from './screens/intro';
+import createGreetingScreen from './screens/greeting';
 
 const mainElement = document.getElementById('main');
 const renderView = (element) => {
@@ -13,7 +14,7 @@ export default class Application {
   }
 
   static showGreeting() {
-    renderView(createRulesScreen());
+    renderView(createGreetingScreen());
   }
 
   static showRules() {
