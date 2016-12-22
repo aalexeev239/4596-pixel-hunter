@@ -2,6 +2,7 @@ import AbstractView from '../view';
 import Application from '../application';
 
 
+
 class GreetingScreen extends AbstractView {
 
   getMarkup() {
