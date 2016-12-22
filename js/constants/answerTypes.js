@@ -1,4 +1,4 @@
-export default {
+export const answerTypes = {
   WRONG: 'wrong',
   SLOW: 'slow',
   FAST: 'fast',

@@ -1,9 +1,8 @@
 import getElementFromTemplate from '../utils/getElementFromTemplate';
 import pluralize from '../utils/pluralizeNoun_ru';
-import renderSlide from '../renderSlide';
 import headerBackTemplate from '../templates/headerBack';
-import getGameElement from './getGameElement';
-import gameData from '../data/game-data';
+import {initGame} from './game';
+
 
 const getRulesElement = ({attempts, attemptTimeInSec, lives}) => {
 
@@ -52,7 +51,7 @@ const getRulesElement = ({attempts, attemptTimeInSec, lives}) => {
       ev.preventDefault();
 
       if (checkInputValidity()) {
-        renderSlide(getGameElement(gameData, 0));
+        initGame();
       }
     };
 

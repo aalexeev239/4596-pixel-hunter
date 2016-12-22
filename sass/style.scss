@@ -28,3 +28,8 @@ body {
 a {
   color: $main-font-color;
 }
+
+.hidden {
+  position: absolute;
+  opacity: 0;
+}
