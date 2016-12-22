@@ -62,7 +62,7 @@ class IntroScreen extends AbstractView {
     ev.preventDefault();
 
     if (this._checkInputValidity()) {
-      console.log('--- wooo');
+      Application.showGame();
     }
   };
 }
