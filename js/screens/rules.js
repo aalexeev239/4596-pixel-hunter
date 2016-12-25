@@ -8,9 +8,9 @@ class IntroScreen extends AbstractView {
 
   constructor(config, data) {
     super();
-    this.pluralizeTotal = `${data.questions.length} ${pluralize(data.questions.length, 'раз', 'раза', 'раз')}`;
-    this.pluralizeSecPerLevel = `${config.timer.SECONDS_PER_LEVEL} ${pluralize(config.timer.SECONDS_PER_LEVEL, 'секунда', 'секунды', 'секунд')}`;
-    this.pluralizeLives = `${config.lives.TOTAL} ${pluralize(config.lives.TOTAL, 'раз', 'раза', 'раз')}`;
+    this._pluralizeTotal = `${data.questions.length} ${pluralize(data.questions.length, 'раз', 'раза', 'раз')}`;
+    this._pluralizeSecPerLevel = `${config.timer.SECONDS_PER_LEVEL} ${pluralize(config.timer.SECONDS_PER_LEVEL, 'секунда', 'секунды', 'секунд')}`;
+    this._pluralizeLives = `${config.lives.TOTAL} ${pluralize(config.lives.TOTAL, 'раз', 'раза', 'раз')}`;
   }
 
   getMarkup() {
@@ -24,12 +24,12 @@ class IntroScreen extends AbstractView {
       </div>
       <div class="rules  central--none">
         <h1 class="rules__title">Правила</h1>
-        <p class="rules__description">Угадай ${this.pluralizeTotal} для каждого изображения фото <img
+        <p class="rules__description">Угадай ${this._pluralizeTotal} для каждого изображения фото <img
           src="img/photo_icon.png" width="16" height="16"> или рисунок <img
           src="img/paint_icon.png" width="16" height="16" alt="">.<br>
           Фотографиями или рисунками могут быть оба изображения.<br>
-          На каждую попытку отводится ${this.pluralizeSecPerLevel}.<br>
-          Ошибиться можно не более ${this.pluralizeLives}.<br>
+          На каждую попытку отводится ${this._pluralizeSecPerLevel}.<br>
+          Ошибиться можно не более ${this._pluralizeLives}.<br>
           <br>
           Готовы?
         </p>
@@ -42,20 +42,20 @@ class IntroScreen extends AbstractView {
   }
 
   bindHandlers() {
-    this.inputElement = this.element.querySelector('.rules__input');
-    this.submitElement = this.element.querySelector('.rules__button');
-    this.formElement = this.element.querySelector('.rules__form');
+    this._inputElement = this.element.querySelector('.rules__input');
+    this._submitElement = this.element.querySelector('.rules__button');
+    this._formElement = this.element.querySelector('.rules__form');
 
-    this.inputElement.addEventListener('input', (this._onInput).bind(this));
-    this.formElement.addEventListener('submit', (this._onSubmit).bind(this));
+    this._inputElement.addEventListener('input', (this._onInput).bind(this));
+    this._formElement.addEventListener('submit', (this._onSubmit).bind(this));
   }
 
   _checkInputValidity() {
-    return this.inputElement.value.trim().length > 0;
+    return this._inputElement.value.trim().length > 0;
   }
 
   _onInput() {
-    this.submitElement.disabled = !this._checkInputValidity();
+    this._submitElement.disabled = !this._checkInputValidity();
   }
 
   _onSubmit(ev) {
