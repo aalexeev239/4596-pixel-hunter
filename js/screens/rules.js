@@ -11,6 +11,8 @@ class IntroScreen extends AbstractView {
     this._pluralizeTotal = `${data.questions.length} ${pluralize(data.questions.length, 'раз', 'раза', 'раз')}`;
     this._pluralizeSecPerLevel = `${config.timer.SECONDS_PER_LEVEL} ${pluralize(config.timer.SECONDS_PER_LEVEL, 'секунда', 'секунды', 'секунд')}`;
     this._pluralizeLives = `${config.lives.TOTAL} ${pluralize(config.lives.TOTAL, 'раз', 'раза', 'раз')}`;
+    this._onInput = this._onInput.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
   }
 
   getMarkup() {
@@ -46,8 +48,8 @@ class IntroScreen extends AbstractView {
     this._submitElement = this.element.querySelector('.rules__button');
     this._formElement = this.element.querySelector('.rules__form');
 
-    this._inputElement.addEventListener('input', (this._onInput).bind(this));
-    this._formElement.addEventListener('submit', (this._onSubmit).bind(this));
+    this._inputElement.addEventListener('input', this._onInput);
+    this._formElement.addEventListener('submit', this._onSubmit);
   }
 
   _checkInputValidity() {
@@ -62,9 +64,15 @@ class IntroScreen extends AbstractView {
     ev.preventDefault();
 
     if (this._checkInputValidity()) {
+      this.clearHandlers();
       Application.showGame();
     }
   };
+
+  clearHandlers() {
+    this._inputElement.removeEventListener('input', this._onInput);
+    this._formElement.removeEventListener('submit', this._onSubmit);
+  }
 }
 
 export default (config, data) => new IntroScreen(config, data).element;

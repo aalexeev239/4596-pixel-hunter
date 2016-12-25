@@ -18,8 +18,13 @@ class IntroScreen extends AbstractView {
     this.element.querySelector('.intro__asterisk').onclick = (ev) => {
       ev.preventDefault();
 
+      this.clearHandlers();
       Application.showGreeting();
     }
+  }
+
+  clearHandlers() {
+    this.element.querySelector('.intro__asterisk').onclick = null;
   }
 }
 
