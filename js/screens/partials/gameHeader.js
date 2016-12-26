@@ -19,7 +19,9 @@ class GameHeader extends AbstractView {
       <header class="header">
         ${headerBackTemplate}
         <h1 class="game__timer">${this._maxTime}</h1>
-        ${this._getLivesMarkup()}
+        <div class="game__lives">
+          ${this._getLivesMarkup()}
+        </div>
        </header>
   `;
   }
