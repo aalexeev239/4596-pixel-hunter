@@ -14,7 +14,7 @@ class GameScreen extends AbstractView {
     super();
     this._state = state;
     this._question = question;
-    this._onFormChange = (this._onFormChange).bind(this);
+    this._onFormChange = this._onFormChange.bind(this);
   }
 
   getMarkup() {
