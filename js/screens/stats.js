@@ -9,8 +9,6 @@ class StatsScreen extends AbstractView {
     super();
     this._pageTitle = pageTitle;
     this._results = results;
-    console.log('--- this._pageTitle', this._pageTitle);
-    console.log('--- this._results', this._results);
   }
 
   getMarkup() {

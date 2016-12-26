@@ -26,7 +26,7 @@ class GameScreen extends AbstractView {
           ${renderStats(this._state.answers)}
         </div>
       </div>
-    `
+    `;
   }
 
   bindHandlers() {
@@ -58,7 +58,7 @@ class GameScreen extends AbstractView {
   }
 
   _timerPad(time) {
-    return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount)
+    return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount);
   }
 
   _onFormChange(ev) {
@@ -92,7 +92,7 @@ class GameScreen extends AbstractView {
     Application.answerQuestion({
       answer,
       time
-    })
+    });
   }
 
 }

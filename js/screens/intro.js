@@ -20,7 +20,7 @@ class IntroScreen extends AbstractView {
 
       this.clearHandlers();
       Application.showGreeting();
-    }
+    };
   }
 
   clearHandlers() {

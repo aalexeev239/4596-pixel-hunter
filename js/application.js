@@ -14,7 +14,7 @@ import createStatsScreen from './screens/stats';
 const mainElement = document.getElementById('main');
 const renderView = (element) => {
   mainElement.innerHTML = '';
-  mainElement.appendChild(element)
+  mainElement.appendChild(element);
 };
 
 const gameModel = new Model(data.questions);

@@ -9,7 +9,7 @@ export default class AbstractView {
   }
 
   getMarkup() {
-    throw new Error(`I'm abstract, baby!`);
+    throw new Error('I\'m abstract, baby!');
   }
 
   bindHandlers() {

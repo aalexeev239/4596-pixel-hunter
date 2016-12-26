@@ -61,7 +61,7 @@ class IntroScreen extends AbstractView {
       this.clearHandlers();
       Application.showGame();
     }
-  };
+  }
 
   clearHandlers() {
     this._inputElement.removeEventListener('input', this._onInput);
