@@ -32,10 +32,16 @@ class GameScreen extends AbstractView {
   bindHandlers() {
     this._formElement = this.element.querySelector('form');
 
-    this._formNameSet = new Set();
-    for (let elem of this._formElement.elements) {
-      this._formNameSet.add(elem.name);
-      this._formName = elem.name;
+
+    // collect input names for multiple options or get single name for else
+    if (this._question.type === questionTypes.GUESS_EVERY_OPTION) {
+      let formElementsNamesSet = new Set();
+      for (let elem of this._formElement.elements) {
+        formElementsNamesSet.add(elem.name);
+      }
+      this._formElementsNamesSet = formElementsNamesSet;
+    } else {
+      this._formElementsName = this._formElement.elements[0].name;
     }
 
     this._formElement.addEventListener('change', this._onFormChange);
@@ -69,20 +75,20 @@ class GameScreen extends AbstractView {
       Array.prototype.forEach.call(this._formElement[input.name], (elem) => {
         elem.disabled = true;
       });
-      for (let name of this._formNameSet) {
-        if (!this._formElement[name].value) {
-          return;
-        }
-      }
 
       let answerArray = [];
 
-      for (let name of this._formNameSet) {
-        answerArray.push(this._formElement[name].value);
+      for (let name of this._formElementsNamesSet) {
+        if (!this._formElement[name].value) {
+          return;
+        } else {
+          answerArray.push(this._formElement[name].value);
+        }
       }
+      
       this._onAnswer(answerArray, this._timer.getTime());
     } else {
-      this._onAnswer(this._formElement[this._formName].value, this._timer.getTime());
+      this._onAnswer(this._formElement[this._formElementsName].value, this._timer.getTime());
     }
   }
 
