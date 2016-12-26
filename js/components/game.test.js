@@ -91,7 +91,7 @@ describe('Game', function () {
         const correctAnswer = data.correctAnswers[initialState.currentQuestion];
         const newState = setAnswer(initialState, {
           answer: correctAnswer,
-          time: 9
+          time: config.timer.SECONDS_PER_LEVEL - 9
         });
 
         assert.equal(newState.answers[newState.currentQuestion], answerTypes.FAST);
@@ -102,7 +102,7 @@ describe('Game', function () {
         const correctAnswer = data.correctAnswers[initialState.currentQuestion];
         const newState = setAnswer(initialState, {
           answer: correctAnswer,
-          time: 21
+          time: config.timer.SECONDS_PER_LEVEL - 21
         });
 
         assert.equal(newState.answers[newState.currentQuestion], answerTypes.SLOW);

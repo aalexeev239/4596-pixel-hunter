@@ -1,12 +1,4 @@
-// import getIntroElement from './components/getIntroElement';
-// import renderSlide from './utils/renderSlide';
-import {gameController} from './components/gameController';
+import Application from './application';
 
-
-// renderSlide(getIntroElement());
-gameController({
-  lives: 3,
-  answers: [],
-  currentQuestion: 0,
-  time: 0
-});
+// Application.showIntro();
+Application.showGame();
