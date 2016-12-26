@@ -77,9 +77,9 @@ export const setAnswer = (state, {answer, time}) => {
     resultAnswer = answerTypes.UNKNOWN;
     resultLives = lives - 1;
   } else if (validateAnswer(answer, currentQuestion)) {
-    if (time < 10) {
+    if (timerConfig.SECONDS_PER_LEVEL - time < 10) {
       resultAnswer = answerTypes.FAST;
-    } else if (time > 20) {
+    } else if (timerConfig.SECONDS_PER_LEVEL - time > 20) {
       resultAnswer = answerTypes.SLOW;
     } else {
       resultAnswer = answerTypes.CORRECT;

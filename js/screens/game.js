@@ -35,6 +35,7 @@ class GameScreen extends AbstractView {
     this._formNameSet = new Set();
     for (let elem of this._formElement.elements) {
       this._formNameSet.add(elem.name);
+      this._formName = elem.name;
     }
 
     this._formElement.addEventListener('change', this._onFormChange);
@@ -81,14 +82,14 @@ class GameScreen extends AbstractView {
       }
       this._onAnswer(answerArray, this._timer.getTime());
     } else {
-      this._onAnswer(this._formElement[formName].value, this._timer.getTime());
+      this._onAnswer(this._formElement[this._formName].value, this._timer.getTime());
     }
   }
 
   _onAnswer(answer, time) {
     this.clearHandlers();
 
-    Application.answerQuestion(this._state, {
+    Application.answerQuestion({
       answer,
       time
     })

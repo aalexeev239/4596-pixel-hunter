@@ -5,9 +5,12 @@ import renderStats from '../templates/renderStats';
 
 class StatsScreen extends AbstractView {
 
-  constructor(pageTitle, results) {
+  constructor({pageTitle, results}) {
+    super();
     this._pageTitle = pageTitle;
     this._results = results;
+    console.log('--- this._pageTitle', this._pageTitle);
+    console.log('--- this._results', this._results);
   }
 
   getMarkup() {
@@ -15,7 +18,7 @@ class StatsScreen extends AbstractView {
       <header class="header">${headerBackTemplate}</header>
       <div class="result">
         <h1>${this._pageTitle}</h1>
-        ${this._results.map(this._renderResult).join('\n')}
+        ${this._results.map((this._renderResult).bind(this)).join('\n')}
       </div>
     `;
   }
@@ -62,4 +65,4 @@ class StatsScreen extends AbstractView {
   }
 }
 
-export default (pageTitle, results) => new StatsScreen(pageTitle, results).element;
+export default (stats) => new StatsScreen(stats).element;

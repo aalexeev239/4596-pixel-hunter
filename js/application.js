@@ -1,23 +1,23 @@
 import data from './data/game-data';
 import config from './config';
+import Model from './components/gameModel';
+import {getStatsData} from './components/game';
+
 
 import createIntroScreen from './screens/intro';
 import createGreetingScreen from './screens/greeting';
 import createRulesScreen from './screens/rules';
 import createNewGame from './screens/game';
+import createStatsScreen from './screens/stats';
 
-const initialState = {
-  lives: 3,
-  answers: [],
-  currentQuestion: 0,
-  time: 0
-};
 
 const mainElement = document.getElementById('main');
 const renderView = (element) => {
   mainElement.innerHTML = '';
   mainElement.appendChild(element)
 };
+
+const gameModel = new Model(data.questions);
 
 export default class Application {
 
@@ -34,14 +34,20 @@ export default class Application {
   }
 
   static showGame() {
-    renderView(createNewGame(initialState, data.questions[0]));
+    if (gameModel.canGoNext()) {
+      gameModel.setNextQuestion();
+      renderView(createNewGame(gameModel.getState(), gameModel.getQuestion()));
+    } else {
+      this.showStats(getStatsData(gameModel.getState()));
+    }
   }
 
-  static answerQuestion(state, formattedAnswer) {
-    console.log('--- formattedAnswer', formattedAnswer);
+  static answerQuestion(formattedAnswer) {
+    gameModel.setAnswer(formattedAnswer);
+    this.showGame();
   }
 
   static showStats(stats) {
-    // renderView(createStatsScreen(stats));
+    renderView(createStatsScreen(stats));
   }
 }
