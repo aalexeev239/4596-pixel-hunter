@@ -57,7 +57,7 @@ class GameScreen extends AbstractView {
   }
 
   _timerPad(time) {
-    return ((new Array(timerConfig.digitCount)).join('0') + (time)).slice(-timerConfig.digitCount)
+    return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount)
   }
 
   _onFormChange(ev) {
