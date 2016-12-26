@@ -37,6 +37,10 @@ export default class Application {
     renderView(createNewGame(initialState, data.questions[0]));
   }
 
+  static answerQuestion(state, formattedAnswer) {
+    console.log('--- formattedAnswer', formattedAnswer);
+  }
+
   static showStats(stats) {
     // renderView(createStatsScreen(stats));
   }
