@@ -49,7 +49,7 @@ class GameScreen extends AbstractView {
     const timerElement = this.element.querySelector('.game__timer');
     this._timer = new Timer(
       () => {
-        timerElement.textContent = this._timerPad(this._timer.getTime());
+        timerElement.textContent = this._getFormattedTime(this._timer.getTime());
       },
       () => {
         this._onAnswer(null, 0);
@@ -63,7 +63,7 @@ class GameScreen extends AbstractView {
     this._formElement.removeEventListener('change', this._onFormChange);
   }
 
-  _timerPad(time) {
+  _getFormattedTime(time) {
     return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount);
   }
 
@@ -85,7 +85,7 @@ class GameScreen extends AbstractView {
           answerArray.push(this._formElement[name].value);
         }
       }
-      
+
       this._onAnswer(answerArray, this._timer.getTime());
     } else {
       this._onAnswer(this._formElement[this._formElementsName].value, this._timer.getTime());
