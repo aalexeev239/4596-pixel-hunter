@@ -4,8 +4,8 @@ import Application from '../application';
 
 import data from '../data/game-data';
 import Timer from './timer';
-import createGameHeaderView from '../screens/gameHeader';
-import createGameScreen from '../screens/game';
+import createGameHeaderView from '../views/gameHeader';
+import createGameView from '../views/game';
 
 
 class GamePresenter {
@@ -34,7 +34,7 @@ class GamePresenter {
     if (this._model.canGoNext()) {
       this._model.setNextQuestion();
 
-      const gameContent = createGameScreen(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
+      const gameContent = createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
       this.root.replaceChild(gameContent.element, this._gameContent.element);
       this._gameContent = gameContent;
 

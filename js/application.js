@@ -1,14 +1,10 @@
 import data from './data/game-data';
 import config from './config';
-import Model from './components/GameModel';
-import {getStatsData} from './components/game';
 
-
-import createIntroScreen from './screens/intro';
-import createGreetingScreen from './screens/greeting';
-import createRulesScreen from './screens/rules';
-import createNewGame from './screens/game';
-import createStatsScreen from './screens/stats';
+import createIntroView from './views/intro';
+import createGreetingView from './views/greeting';
+import createRulesView from './views/rules';
+import createStatsView from './views/stats';
 import createGame from './components/GamePresenter';
 
 
@@ -21,15 +17,15 @@ const renderView = (element) => {
 export default class Application {
 
   static showIntro() {
-    renderView(createIntroScreen().element);
+    renderView(createIntroView().element);
   }
 
   static showGreeting() {
-    renderView(createGreetingScreen().element);
+    renderView(createGreetingView().element);
   }
 
   static showRules() {
-    renderView(createRulesScreen(config, data).element);
+    renderView(createRulesView(config, data).element);
   }
 
   static showGame() {
@@ -37,6 +33,6 @@ export default class Application {
   }
 
   static showStats(stats) {
-    renderView(createStatsScreen(stats).element);
+    renderView(createStatsView(stats).element);
   }
 }
