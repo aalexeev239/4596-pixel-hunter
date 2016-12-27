@@ -64,7 +64,7 @@ class GameScreen extends AbstractView {
   }
 
   _getFormattedTime(time) {
-    return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount);
+    return ((new Array(timerConfig.DIGIT_COUNT)).join('0') + (time + 1)).slice(-timerConfig.DIGIT_COUNT);
   }
 
   _onFormChange(ev) {
