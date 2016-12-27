@@ -71,7 +71,6 @@ class GameScreen extends AbstractView {
   }
 
   _onAnswer(answer) {
-    this.clearHandlers();
     this._answerCallback(answer);
   }
 
