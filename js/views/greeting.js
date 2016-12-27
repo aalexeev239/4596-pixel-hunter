@@ -35,4 +35,4 @@ class GreetingScreen extends AbstractView {
   }
 }
 
-export default () => new GreetingScreen().element;
+export default () => new GreetingScreen();

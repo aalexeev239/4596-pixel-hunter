@@ -1,6 +1,6 @@
 export const timer = {
   SECONDS_PER_LEVEL: 30,
-  digitCount: 2
+  DIGIT_COUNT: 2
 };
 
 export const lives = {

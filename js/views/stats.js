@@ -63,4 +63,4 @@ class StatsScreen extends AbstractView {
   }
 }
 
-export default (stats) => new StatsScreen(stats).element;
+export default (stats) => new StatsScreen(stats);

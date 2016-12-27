@@ -1,25 +1,21 @@
 import AbstractView from '../view';
-import Application from '../application';
 import renderQuestion from '../templates/renderQuestion';
 import renderStats from '../templates/renderStats';
-import renderGameHeader from '../templates/renderGameHeader';
-import Timer from '../components/timer';
-import {timer as timerConfig} from '../config';
 import questionTypes from '../constants/questionTypes';
 
 
 class GameScreen extends AbstractView {
 
-  constructor(state, question) {
+  constructor(state, question, answerCallback) {
     super();
     this._state = state;
     this._question = question;
+    this._answerCallback = answerCallback;
     this._onFormChange = this._onFormChange.bind(this);
   }
 
   getMarkup() {
     return `
-      ${renderGameHeader(this._state.lives)}
       <div class="game">
         ${renderQuestion(this._question)}
         <div class="stats">
@@ -31,7 +27,6 @@ class GameScreen extends AbstractView {
 
   bindHandlers() {
     this._formElement = this.element.querySelector('form');
-
 
     // collect input names for multiple options or get single name for else
     if (this._question.type === questionTypes.GUESS_EVERY_OPTION) {
@@ -45,26 +40,10 @@ class GameScreen extends AbstractView {
     }
 
     this._formElement.addEventListener('change', this._onFormChange);
-
-    const timerElement = this.element.querySelector('.game__timer');
-    this._timer = new Timer(
-      () => {
-        timerElement.textContent = this._getFormattedTime(this._timer.getTime());
-      },
-      () => {
-        this._onAnswer(null, 0);
-      }
-    );
-    this._timer.start();
   }
 
   clearHandlers() {
-    this._timer.stop();
     this._formElement.removeEventListener('change', this._onFormChange);
-  }
-
-  _getFormattedTime(time) {
-    return ((new Array(timerConfig.digitCount)).join('0') + (time + 1)).slice(-timerConfig.digitCount);
   }
 
   _onFormChange(ev) {
@@ -85,22 +64,16 @@ class GameScreen extends AbstractView {
           answerArray.push(this._formElement[name].value);
         }
       }
-
-      this._onAnswer(answerArray, this._timer.getTime());
+      this._onAnswer(answerArray);
     } else {
-      this._onAnswer(this._formElement[this._formElementsName].value, this._timer.getTime());
+      this._onAnswer(this._formElement[this._formElementsName].value);
     }
   }
 
-  _onAnswer(answer, time) {
-    this.clearHandlers();
-
-    Application.answerQuestion({
-      answer,
-      time
-    });
+  _onAnswer(answer) {
+    this._answerCallback(answer);
   }
 
 }
 
-export default (state, question) => new GameScreen(state, question).element;
+export default (state, question, answerCallback) => new GameScreen(state, question, answerCallback);

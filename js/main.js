@@ -1,4 +1,4 @@
 import Application from './application';
 
-// Application.showIntro();
-Application.showGame();
+Application.showIntro();
+// Application.showGame();

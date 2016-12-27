@@ -19,11 +19,13 @@ export default class Timer {
     }, 1000);
 
     this._tick();
+
+    return this;
   }
 
   stop() {
     clearInterval(this._tickInterval);
-    return this._value;
+    return this;
   }
 
   getTime() {

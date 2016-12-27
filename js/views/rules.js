@@ -69,4 +69,4 @@ class IntroScreen extends AbstractView {
   }
 }
 
-export default (config, data) => new IntroScreen(config, data).element;
+export default (config, data) => new IntroScreen(config, data);
