@@ -10,7 +10,7 @@ import createGameView from '../views/game';
 
 class GamePresenter {
   constructor(Model) {
-    this._getData(); // todo: promisify
+    this._data = this._getData(); // todo: promisify
 
     this._model = new Model(this._data.questions);
 
@@ -27,7 +27,7 @@ class GamePresenter {
 
 
   _getData() {
-    this._data = data;
+    return data;
   }
 
   _changeLevel() {
