@@ -1,6 +1,6 @@
 import data from './data/game-data';
 import config from './config';
-import Model from './components/gameModel';
+import Model from './components/GameModel';
 import {getStatsData} from './components/game';
 
 
@@ -9,6 +9,7 @@ import createGreetingScreen from './screens/greeting';
 import createRulesScreen from './screens/rules';
 import createNewGame from './screens/game';
 import createStatsScreen from './screens/stats';
+import createGame from './components/GamePresenter';
 
 
 const mainElement = document.getElementById('main');
@@ -17,37 +18,25 @@ const renderView = (element) => {
   mainElement.appendChild(element);
 };
 
-const gameModel = new Model(data.questions);
-
 export default class Application {
 
   static showIntro() {
-    renderView(createIntroScreen());
+    renderView(createIntroScreen().element);
   }
 
   static showGreeting() {
-    renderView(createGreetingScreen());
+    renderView(createGreetingScreen().element);
   }
 
   static showRules() {
-    renderView(createRulesScreen(config, data));
+    renderView(createRulesScreen(config, data).element);
   }
 
   static showGame() {
-    if (gameModel.canGoNext()) {
-      gameModel.setNextQuestion();
-      renderView(createNewGame(gameModel.getState(), gameModel.getQuestion()));
-    } else {
-      this.showStats(getStatsData(gameModel.getState()));
-    }
-  }
-
-  static answerQuestion(formattedAnswer) {
-    gameModel.setAnswer(formattedAnswer);
-    this.showGame();
+    renderView(createGame());
   }
 
   static showStats(stats) {
-    renderView(createStatsScreen(stats));
+    renderView(createStatsScreen(stats).element);
   }
 }
