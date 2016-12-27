@@ -50,8 +50,6 @@ const validateAnswer = (answer, question) => {
 
     case questionTypes.FIND_PAINT:
       answer = +answer;
-      console.log('--- question', question);
-      console.log('--- questionFindPaintTypesMap[question.question]', questionFindPaintTypesMap.get(question.question));
       return isInteger(answer) &&
         answer < question.answers.length &&
         question.answers[answer].type === questionFindPaintTypesMap.get(question.question);

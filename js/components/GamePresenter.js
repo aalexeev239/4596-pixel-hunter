@@ -25,9 +25,7 @@ class GamePresenter {
 
 
   _getData() {
-    return window
-      .fetch(serverConfig.QUESTIONS_URL)
-      .then(response => response.json())
+    return window.fetch(serverConfig.QUESTIONS_URL).then((response) => response.json());
   }
 
   _changeLevel() {
