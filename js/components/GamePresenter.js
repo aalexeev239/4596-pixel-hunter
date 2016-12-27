@@ -10,7 +10,7 @@ import createGameView from '../views/game';
 
 class GamePresenter {
   constructor(Model) {
-    this._data = this._getData(); // todo: promisify
+    this._data = this._getData(); // promisify
 
     this._model = new Model(this._data.questions);
 
@@ -47,9 +47,10 @@ class GamePresenter {
         }
       );
       this._timer.start();
-    } else {
-      Application.showStats(getStatsData(this._model.getState()));
+      return;
     }
+
+    Application.showStats(getStatsData(this._model.getState()));
   }
 
   _onAnswer(answer) {
