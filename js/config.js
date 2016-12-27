@@ -11,7 +11,8 @@ export const initialState = {
   lives: 3,
   answers: [],
   currentQuestion: -1,
-  time: 0
+  time: 0,
+  maxQuestions: 0
 };
 
 export const server = {
