@@ -8,7 +8,8 @@ const initialState = {
   lives: 3,
   answers: [],
   currentQuestion: 0,
-  time: 0
+  time: 0,
+  maxQuestions: data.length
 };
 
 
@@ -53,7 +54,7 @@ describe('Game', function () {
       });
 
       it('should throw an Error if too big value passed', () => {
-        assert.throws(() => setQuestion(initialState, data.questions.length));
+        assert.throws(() => setQuestion(initialState, data.length));
       });
     });
   });
@@ -73,7 +74,7 @@ describe('Game', function () {
         const newState = setAnswer(initialState, {
           answer: 'qwert',
           time: 10
-        });
+        }, data[initialState.currentQuestion]);
 
         assert.equal(newState.answers[newState.currentQuestion], answerTypes.WRONG);
       });
@@ -82,28 +83,28 @@ describe('Game', function () {
         const newState = setAnswer(initialState, {
           answer: 'qwert',
           time: config.timer.SECONDS_PER_LEVEL + 10
-        });
+        }, data[initialState.currentQuestion]);
 
         assert((newState.lives === initialState.lives - 1) && (newState.answers[newState.currentQuestion] === answerTypes.UNKNOWN));
       });
 
       it('should mark answer as fast if passed less then 10 secs', () => {
-        const correctAnswer = data.correctAnswers[initialState.currentQuestion];
+        const correctAnswer = ['photo', 'painting'];
         const newState = setAnswer(initialState, {
           answer: correctAnswer,
           time: config.timer.SECONDS_PER_LEVEL - 9
-        });
+        }, data[0]);
 
         assert.equal(newState.answers[newState.currentQuestion], answerTypes.FAST);
       });
 
 
       it('should mark answer as slow if passed more then 20 secs', () => {
-        const correctAnswer = data.correctAnswers[initialState.currentQuestion];
+        const correctAnswer = ['photo', 'painting'];
         const newState = setAnswer(initialState, {
           answer: correctAnswer,
           time: config.timer.SECONDS_PER_LEVEL - 21
-        });
+        }, data[0]);
 
         assert.equal(newState.answers[newState.currentQuestion], answerTypes.SLOW);
       });
@@ -112,7 +113,7 @@ describe('Game', function () {
         const newState = setAnswer(initialState, {
           answer: 'qwert',
           time: 0
-        });
+        }, data[initialState.currentQuestion]);
 
         assert.equal(newState.lives, initialState.lives - 1);
       });
@@ -123,28 +124,29 @@ describe('Game', function () {
         assert.throws(() => setAnswer(initialState, {
           answer: 'qwert',
           time: -1
-        }));
+        }, data[initialState.currentQuestion]));
       });
 
       it('should throw an Error if current lives is 0', () => {
         assert.throws(() => setAnswer(Object.assign({}, initialState, {lives: 0}), {
           answer: 'qwert',
           time: 10
-        }));
+        }, data[initialState.currentQuestion]));
       });
     });
   });
 
   describe('Stats | getStatsData', () => {
 
-    const questionsLength = data.questions.length;
+    const questionsLength = data.length;
     const getFullfilledAnwers = () => {
       return [...Array(questionsLength)].map(() => answerTypes.CORRECT);
     };
     const fullfilledState = {
       answers: getFullfilledAnwers(),
       currentQuestion: questionsLength - 1,
-      lives: 1
+      lives: 1,
+      maxQuestions: questionsLength
     };
 
 
@@ -184,9 +186,10 @@ describe('Game', function () {
     describe('Failure', () => {
       it('should throw an error if extra values passed', () => {
         const state = Object.assign({}, initialState, {
-          answers: Array(data.correctAnswers.length + 1),
+          answers: Array(questionsLength + 1),
           lives: 0,
-          currentQuestion: questionsLength - 1
+          currentQuestion: questionsLength - 1,
+          maxQuestions: questionsLength
         });
         assert.throws(() => getStatsData(state));
       });
