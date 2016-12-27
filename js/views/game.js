@@ -3,7 +3,6 @@ import renderQuestion from '../templates/renderQuestion';
 import renderStats from '../templates/renderStats';
 import questionTypes from '../constants/questionTypes';
 
-
 class GameScreen extends AbstractView {
 
   constructor(state, question, answerCallback) {
@@ -19,7 +18,7 @@ class GameScreen extends AbstractView {
       <div class="game">
         ${renderQuestion(this._question)}
         <div class="stats">
-          ${renderStats(this._state.answers)}
+          ${renderStats(this._state)}
         </div>
       </div>
     `;

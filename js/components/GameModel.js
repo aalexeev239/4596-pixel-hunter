@@ -4,8 +4,9 @@ import {setAnswer, setQuestion} from './game';
 
 export default class GameModel {
   constructor(questions, state = initialState) {
-    this._state = state;
     this._questions = questions;
+    this._state = state;
+    this._state.maxQuestions = this._questions.length;
   }
 
   getState() {
@@ -13,7 +14,7 @@ export default class GameModel {
   }
 
   canGoNext() {
-    return (this._state.lives > 0) && (this._state.currentQuestion < this._questions.length - 1);
+    return (this._state.lives > 0) && (this._state.currentQuestion < this._state.maxQuestions - 1);
   }
 
   getQuestion() {
@@ -21,7 +22,7 @@ export default class GameModel {
   }
 
   setAnswer(answer) {
-    this._state = setAnswer(this._state, answer);
+    this._state = setAnswer(this._state, answer, this._questions[this._state.currentQuestion]);
     return this;
   }
 
