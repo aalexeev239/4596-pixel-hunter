@@ -74,4 +74,4 @@ const game = new GamePresenter(GameModel);
 export default () => {
   game.start();
   return game.root;
-}
+};

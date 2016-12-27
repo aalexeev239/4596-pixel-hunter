@@ -1,6 +1,6 @@
 import AbstractView from '../view';
 import headerBackTemplate from '../templates/headerBack';
-import {lives as livesConfig, timer as timerConfig,} from '../config';
+import {lives as livesConfig, timer as timerConfig} from '../config';
 
 class GameHeader extends AbstractView {
 
