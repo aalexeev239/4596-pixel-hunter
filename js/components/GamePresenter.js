@@ -36,6 +36,7 @@ class GamePresenter {
 
       const gameContent = createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
       this.root.replaceChild(gameContent.element, this._gameContent.element);
+      this._gameContent.clearHandlers();
       this._gameContent = gameContent;
 
       this._timer = new Timer(
