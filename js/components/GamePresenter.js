@@ -1,19 +1,14 @@
 import GameModel from './GameModel';
 import {getStatsData} from './game';
 import Application from '../application';
-
-import data from '../data/game-data';
+import {server as serverConfig} from '../config';
 import Timer from './timer';
 import createGameHeaderView from '../views/gameHeader';
 import createGameView from '../views/game';
 
 
 class GamePresenter {
-  constructor(Model) {
-    this._data = this._getData(); // promisify
-
-    this._model = new Model(this._data.questions);
-
+  constructor() {
     this._header = {element: document.createElement('div')};
     this._gameContent = {element: document.createElement('div')};
     this.root = document.createElement('div');
@@ -22,12 +17,17 @@ class GamePresenter {
   }
 
   start() {
-    this._changeLevel();
+    this._getData().then((data) => {
+      this._model = new GameModel(data);
+      this._changeLevel();
+    });
   }
 
 
   _getData() {
-    return data;
+    return window
+      .fetch(serverConfig.QUESTIONS_URL)
+      .then(response => response.json())
   }
 
   _changeLevel() {
@@ -76,7 +76,7 @@ class GamePresenter {
   }
 }
 
-const game = new GamePresenter(GameModel);
+const game = new GamePresenter();
 
 export default () => {
   game.start();

@@ -14,6 +14,10 @@ export const initialState = {
   time: 0
 };
 
+export const server = {
+  QUESTIONS_URL: 'https://intensive-ecmascript-server-nnpnvhhedl.now.sh/pixel-hunter/questions'
+};
+
 // various export possibilities
 export default {
   timer,
