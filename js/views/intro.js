@@ -14,7 +14,8 @@ class IntroScreen extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.intro__asterisk').onclick = (ev) => {
+    this._btn = this.element.querySelector('.intro__asterisk');
+    this._btn.onclick = (ev) => {
       ev.preventDefault();
 
       this.clearHandlers();
@@ -23,7 +24,7 @@ class IntroScreen extends AbstractView {
   }
 
   clearHandlers() {
-    this.element.querySelector('.intro__asterisk').onclick = null;
+    this._btn.onclick = null;
   }
 }
 

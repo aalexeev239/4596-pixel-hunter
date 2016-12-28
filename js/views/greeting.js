@@ -22,16 +22,16 @@ class GreetingScreen extends AbstractView {
   }
 
   bindHandlers() {
-    this.element.querySelector('.greeting__continue').onclick = (ev) => {
+    this._btn = this.element.querySelector('.greeting__continue');
+    this._btn.onclick = (ev) => {
       ev.preventDefault();
-
       this.clearHandlers();
       Application.showRules();
     };
   }
 
   clearHandlers() {
-    this.element.querySelector('.greeting__continue').onclick = null;
+    this._btn.onclick = null;
   }
 }
 
