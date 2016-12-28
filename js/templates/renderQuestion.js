@@ -2,7 +2,6 @@ import questionTypes from '../constants/questionTypes';
 import renderOptionChoose from './renderOptionChoose';
 import renderOptionSelect from './renderOptionSelect';
 
-
 const func = (question) => {
   switch (question.type) {
     case questionTypes.GUESS_SINGLE_OPTION:
@@ -22,6 +21,7 @@ const func = (question) => {
         <form class="game__content game__content--triple">
           ${question.answers.map(renderOptionSelect).join('\n')}
         </form>`;
+
     default:
       return '';
   }

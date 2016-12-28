@@ -2,9 +2,7 @@ import {answerTypes} from '../constants/answerTypes';
 import {scores} from '../constants/scores';
 import questionTypes from '../constants/questionTypes';
 import {questionFindPaintTypesMap} from '../constants/questionTypes';
-
 import isInteger from '../utils/isInteger';
-
 import {lives as livesConfig, timer as timerConfig} from '../config';
 
 export const setLives = (state, lives) => {

@@ -1,6 +1,5 @@
 import answerVariants from '../constants/answerVariants';
 
-
 const func = ({image: {url, width, height}}, index) => `<div class="game__option">
       <img src="${url}" alt="${index}" width="${width}" height="${height}">
       <label class="game__answer game__answer--photo">

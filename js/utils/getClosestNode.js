@@ -5,7 +5,6 @@ const getClosestNode = (node, className) => {
     }
     node = node.parentNode;
   }
-
   return null;
 };
 

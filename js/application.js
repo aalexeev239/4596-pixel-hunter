@@ -1,12 +1,10 @@
 import data from './data/game-data';
 import config from './config';
-
 import createIntroView from './views/intro';
 import createGreetingView from './views/greeting';
 import createRulesView from './views/rules';
 import createStatsView from './views/stats';
 import createGame from './components/GamePresenter';
-
 
 const mainElement = document.getElementById('main');
 const renderView = (element) => {

@@ -39,7 +39,6 @@ const renderResult = (result, index) => {
 
 const getStatsElement = (data) => {
   const {pageTitle, results} = data;
-
   const template = `<header class="header">
     ${headerBack}
   </header>
@@ -47,7 +46,6 @@ const getStatsElement = (data) => {
     <h1>${pageTitle}</h1>
     ${results.map(renderResult).join('\n')}
   </div>`;
-
   return getElementFromTemplate(template);
 };
 

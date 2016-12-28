@@ -7,7 +7,6 @@ import createGameHeaderView from '../views/gameHeader';
 import createGameView from '../views/game';
 import checkResponseStatus from '../utils/checkResponseStatus';
 
-
 class GamePresenter {
   constructor(username = serverConfig.NO_USER) {
     this._username = username;
@@ -24,7 +23,6 @@ class GamePresenter {
       this._changeLevel();
     });
   }
-
 
   _getData() {
     return window.fetch(serverConfig.QUESTIONS_URL).then(checkResponseStatus).then((response) => response.json()).catch(this._handleError);

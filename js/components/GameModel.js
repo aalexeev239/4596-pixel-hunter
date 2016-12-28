@@ -1,7 +1,6 @@
 import {initialState} from '../config';
 import {setAnswer, setQuestion} from './game';
 
-
 export default class GameModel {
   constructor(questions, state = initialState) {
     this._questions = questions;

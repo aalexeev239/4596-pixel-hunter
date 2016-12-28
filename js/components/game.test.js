@@ -12,7 +12,6 @@ const initialState = {
   maxQuestions: data.length
 };
 
-
 describe('Game', function () {
 
   describe('Lives | setLives', () => {

@@ -33,7 +33,6 @@ class GameScreen extends AbstractView {
 
   bindHandlers() {
     this._formElement = this.element.querySelector('form');
-
     const images = this.element.querySelectorAll('img');
 
     for (let image of images) {
@@ -69,7 +68,6 @@ class GameScreen extends AbstractView {
       Array.prototype.forEach.call(this._formElement[input.name], (elem) => {
         elem.disabled = true;
       });
-
       let answerArray = [];
 
       for (let name of this._formElementsNamesSet) {
@@ -88,7 +86,6 @@ class GameScreen extends AbstractView {
   _onAnswer(answer) {
     this._answerCallback(answer);
   }
-
 }
 
 export default (state, question, answerCallback) => new GameScreen(state, question, answerCallback);
