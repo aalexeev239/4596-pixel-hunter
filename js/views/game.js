@@ -10,8 +10,6 @@ const IMAGE_SIZES = new Map([
   [questionTypes.FIND_PAINT, {width: 304, height: 455}]
 ]);
 
-console.log('--- IMAGE_SIZES', IMAGE_SIZES);
-
 class GameScreen extends AbstractView {
 
   constructor(state, question, answerCallback) {
