@@ -35,4 +35,8 @@ export default class Application {
   static showStats(stats) {
     renderView(createStatsView(stats).element);
   }
+
+  static showError(error) {
+    throw error;
+  }
 }

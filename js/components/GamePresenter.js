@@ -5,6 +5,7 @@ import {server as serverConfig} from '../config';
 import Timer from './timer';
 import createGameHeaderView from '../views/gameHeader';
 import createGameView from '../views/game';
+import checkResponseStatus from '../utils/checkResponseStatus';
 
 
 class GamePresenter {
@@ -26,7 +27,7 @@ class GamePresenter {
 
 
   _getData() {
-    return window.fetch(serverConfig.QUESTIONS_URL).then((response) => response.json());
+    return window.fetch(serverConfig.QUESTIONS_URL + '1111').then(checkResponseStatus).then((response) => response.json()).catch(this._handleError);
   }
 
   _changeLevel() {
@@ -86,8 +87,12 @@ class GamePresenter {
       method: 'POST',
       body: payload
     }).then(() => {
-      window.fetch(requestUrl).then((response) => response.json()).then((response) => Application.showStats(getStatsData(response, maxQuestions)));
-    });
+      window.fetch(requestUrl).then(checkResponseStatus).then((response) => response.json()).then((response) => Application.showStats(getStatsData(response, maxQuestions)));
+    }).catch(this._handleError);
+  }
+
+  _handleError(error) {
+    Application.showError(error);
   }
 }
 
