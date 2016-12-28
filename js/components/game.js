@@ -141,21 +141,15 @@ const getAdditionals = (answers, lives) => {
   return result;
 };
 
-export const getStatsData = (state) => {
-  const {lives, answers, currentQuestion, maxQuestions} = state;
-  let pageTitle = 'FAIL';
+const getSingleStatsData = ({stats, lives}) => {
+  const answers = stats || []; // backend tro-lo-lo
   let isSuccess = false;
   let points = null;
   let total = null;
   let additionals = [];
   let final = null;
 
-  if (answers.length > maxQuestions) {
-    throw new RangeError('too many answers');
-  }
-
-  if (lives > 0 && currentQuestion === maxQuestions - 1) {
-    pageTitle = 'Победа!';
+  if (answers.length && lives > 0) {
     isSuccess = true;
     points = 100; // WTF??????
     total = answers.filter(isAnswerCorrect).length * scores.CORRECT;
@@ -164,16 +158,29 @@ export const getStatsData = (state) => {
   }
 
   return {
+    answers,
+    isSuccess,
+    points,
+    total,
+    additionals,
+    final
+  };
+};
+
+export const getStatsData = (resultsArray, maxQuestions) => {
+  let pageTitle = 'FAIL';
+  const results = resultsArray
+    .map(getSingleStatsData)
+    .map((result) => {
+      result.maxQuestions = maxQuestions;
+      return result;
+    });
+  if (results.length && results.every((result) => result.isSuccess)) {
+    pageTitle = 'Победа!';
+  }
+  return {
     pageTitle,
-    results: [{
-      answers,
-      isSuccess,
-      points,
-      total,
-      additionals,
-      final,
-      maxQuestions
-    }]
+    results
   };
 };
 

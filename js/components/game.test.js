@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {setLives, setQuestion, setAnswer, getStatsData} from './game';
+import {setLives, setQuestion, setAnswer} from './game';
 import data from '../data/game-data';
 import config from '../config';
 import {answerTypes} from '../constants/answerTypes';
@@ -136,93 +136,93 @@ describe('Game', function () {
     });
   });
 
-  describe('Stats | getStatsData', () => {
-
-    const questionsLength = data.length;
-    const getFullfilledAnwers = () => {
-      return [...Array(questionsLength)].map(() => answerTypes.CORRECT);
-    };
-    const fullfilledState = {
-      answers: getFullfilledAnwers(),
-      currentQuestion: questionsLength - 1,
-      lives: 1,
-      maxQuestions: questionsLength
-    };
-
-
-    describe('Calculating', () => {
-
-      it('should give 100 points on each correct answer', () => {
-        assert.equal(getStatsData(fullfilledState).results[0].total, 100 * questionsLength);
-      });
-
-
-      it('should add 50 points on fast answer', () => {
-        let answers = getFullfilledAnwers();
-        answers[0] = answerTypes.FAST;
-        const state = Object.assign({}, fullfilledState, {
-          answers
-        });
-        const finalData = getStatsData(state).results[0];
-        assert.equal(finalData.additionals.filter((i) => i.title === 'Бонус за скорость')[0].total, 50);
-      });
-
-      it('should decrease 50 points on slow answer', () => {
-        let answers = getFullfilledAnwers();
-        answers[0] = answerTypes.SLOW;
-        const state = Object.assign({}, fullfilledState, {
-          answers
-        });
-        const finalData = getStatsData(state).results[0];
-        assert.equal(finalData.additionals.filter((i) => i.title === 'Штраф за медлительность')[0].total, -50);
-      });
-
-      it('should add 50 points on each live', () => {
-        const finalData = getStatsData(fullfilledState).results[0];
-        assert.equal(finalData.additionals.filter((i) => i.title === 'Бонус за жизни')[0].total, 50);
-      });
-    });
-
-    describe('Failure', () => {
-      it('should throw an error if extra values passed', () => {
-        const state = Object.assign({}, initialState, {
-          answers: Array(questionsLength + 1),
-          lives: 0,
-          currentQuestion: questionsLength - 1,
-          maxQuestions: questionsLength
-        });
-        assert.throws(() => getStatsData(state));
-      });
-
-      it('should return failure page title if lives === 0', () => {
-        const state = Object.assign({}, fullfilledState, {
-          lives: 0
-        });
-        assert.equal(getStatsData(state).pageTitle, 'FAIL');
-      });
-
-      it('should return null final score if lives === 0', () => {
-        const state = Object.assign({}, fullfilledState, {
-          lives: 0
-        });
-        assert.equal(getStatsData(state).results[0].final, null);
-      });
-
-      it('should return failure page title if there\'s not enough answers', () => {
-        const state = Object.assign({}, fullfilledState, {
-          answers: [...Array(questionsLength - 1)].map(() => answerTypes.CORRECT),
-          currentQuestion: questionsLength - 2
-        });
-        assert.equal(getStatsData(state).pageTitle, 'FAIL');
-      });
-
-      it('should return null final score if there\'s not enough answers', () => {
-        const state = Object.assign({}, fullfilledState, {
-          answers: [...Array(questionsLength - 1)].map(() => answerTypes.CORRECT),
-          currentQuestion: questionsLength - 2
-        });
-        assert.equal(getStatsData(state).results[0].final, null);
-      });
-    });
-  });
+  // describe('Stats | getStatsData', () => {
+  //
+  //   const questionsLength = data.length;
+  //   const getFullfilledAnwers = () => {
+  //     return [...Array(questionsLength)].map(() => answerTypes.CORRECT);
+  //   };
+  //   const fullfilledState = {
+  //     answers: getFullfilledAnwers(),
+  //     currentQuestion: questionsLength - 1,
+  //     lives: 1,
+  //     maxQuestions: questionsLength
+  //   };
+  //
+  //
+  //   describe('Calculating', () => {
+  //
+  //     it('should give 100 points on each correct answer', () => {
+  //       assert.equal(getStatsData(fullfilledState).results[0].total, 100 * questionsLength);
+  //     });
+  //
+  //
+  //     it('should add 50 points on fast answer', () => {
+  //       let answers = getFullfilledAnwers();
+  //       answers[0] = answerTypes.FAST;
+  //       const state = Object.assign({}, fullfilledState, {
+  //         answers
+  //       });
+  //       const finalData = getStatsData(state).results[0];
+  //       assert.equal(finalData.additionals.filter((i) => i.title === 'Бонус за скорость')[0].total, 50);
+  //     });
+  //
+  //     it('should decrease 50 points on slow answer', () => {
+  //       let answers = getFullfilledAnwers();
+  //       answers[0] = answerTypes.SLOW;
+  //       const state = Object.assign({}, fullfilledState, {
+  //         answers
+  //       });
+  //       const finalData = getStatsData(state).results[0];
+  //       assert.equal(finalData.additionals.filter((i) => i.title === 'Штраф за медлительность')[0].total, -50);
+  //     });
+  //
+  //     it('should add 50 points on each live', () => {
+  //       const finalData = getStatsData(fullfilledState).results[0];
+  //       assert.equal(finalData.additionals.filter((i) => i.title === 'Бонус за жизни')[0].total, 50);
+  //     });
+  //   });
+  //
+  //   describe('Failure', () => {
+  //     it('should throw an error if extra values passed', () => {
+  //       const state = Object.assign({}, initialState, {
+  //         answers: Array(questionsLength + 1),
+  //         lives: 0,
+  //         currentQuestion: questionsLength - 1,
+  //         maxQuestions: questionsLength
+  //       });
+  //       assert.throws(() => getStatsData(state));
+  //     });
+  //
+  //     it('should return failure page title if lives === 0', () => {
+  //       const state = Object.assign({}, fullfilledState, {
+  //         lives: 0
+  //       });
+  //       assert.equal(getStatsData(state).pageTitle, 'FAIL');
+  //     });
+  //
+  //     it('should return null final score if lives === 0', () => {
+  //       const state = Object.assign({}, fullfilledState, {
+  //         lives: 0
+  //       });
+  //       assert.equal(getStatsData(state).results[0].final, null);
+  //     });
+  //
+  //     it('should return failure page title if there\'s not enough answers', () => {
+  //       const state = Object.assign({}, fullfilledState, {
+  //         answers: [...Array(questionsLength - 1)].map(() => answerTypes.CORRECT),
+  //         currentQuestion: questionsLength - 2
+  //       });
+  //       assert.equal(getStatsData(state).pageTitle, 'FAIL');
+  //     });
+  //
+  //     it('should return null final score if there\'s not enough answers', () => {
+  //       const state = Object.assign({}, fullfilledState, {
+  //         answers: [...Array(questionsLength - 1)].map(() => answerTypes.CORRECT),
+  //         currentQuestion: questionsLength - 2
+  //       });
+  //       assert.equal(getStatsData(state).results[0].final, null);
+  //     });
+  //   });
+  // });
 });

@@ -8,7 +8,8 @@ import createGameView from '../views/game';
 
 
 class GamePresenter {
-  constructor() {
+  constructor(username = serverConfig.NO_USER) {
+    this._username = username;
     this._header = {element: document.createElement('div')};
     this._gameContent = {element: document.createElement('div')};
     this.root = document.createElement('div');
@@ -29,14 +30,15 @@ class GamePresenter {
   }
 
   _changeLevel() {
+    if (this._gameContent.clearHandlers) {
+      this._gameContent.clearHandlers();
+    }
     if (this._model.canGoNext()) {
       this._model.setNextQuestion();
 
       const gameContent = createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
       this.root.replaceChild(gameContent.element, this._gameContent.element);
-      if (this._gameContent.clearHandlers) {
-        this._gameContent.clearHandlers();
-      }
+
       this._gameContent = gameContent;
 
       this._timer = new Timer(
@@ -50,8 +52,7 @@ class GamePresenter {
       this._timer.start();
       return;
     }
-
-    Application.showStats(getStatsData(this._model.getState()));
+    this._showStats();
   }
 
   _onAnswer(answer) {
@@ -72,11 +73,26 @@ class GamePresenter {
     }
     this._header = header;
   }
+
+  _showStats() {
+    const requestUrl = serverConfig.STATS_URL_TEMPLATE.replace(/:username/g, this._username);
+    const {answers, lives, maxQuestions} = this._model.getState();
+    const payload = JSON.stringify({
+      stats: answers,
+      lives
+    });
+
+    window.fetch(requestUrl, {
+      method: 'POST',
+      body: payload
+    }).then(() => {
+      window.fetch(requestUrl).then((response) => response.json()).then((response) => Application.showStats(getStatsData(response, maxQuestions)));
+    });
+  }
 }
 
-const game = new GamePresenter();
-
-export default () => {
+export default (username) => {
+  const game = new GamePresenter(username);
   game.start();
   return game.root;
 };

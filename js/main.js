@@ -1,5 +1,5 @@
 import Application from './application';
 import 'whatwg-fetch';
 
-// Application.showIntro();
-Application.showGame();
+Application.showIntro();
+// Application.showGame();
