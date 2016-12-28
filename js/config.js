@@ -21,9 +21,14 @@ export const server = {
   NO_USER: 'noname'
 };
 
+export const game = {
+  TOTAL_QUESTIONS: 10
+};
+
 // various export possibilities
 export default {
   timer,
   lives,
-  initialState
+  initialState,
+  game
 };
