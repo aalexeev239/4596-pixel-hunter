@@ -3,9 +3,9 @@ import Application from '../application';
 import pluralize from '../utils/pluralizeNoun_ru';
 import headerBackTemplate from '../templates/headerBack';
 
-class IntroScreen extends AbstractView {
+class RulesScreen extends AbstractView {
 
-  constructor(config, data) {
+  constructor(config) {
     super();
     this._pluralizeSecPerLevel = `${config.timer.SECONDS_PER_LEVEL} ${pluralize(config.timer.SECONDS_PER_LEVEL, 'секунда', 'секунды', 'секунд')}`;
     this._pluralizeLives = `${config.lives.TOTAL} ${pluralize(config.lives.TOTAL, 'раз', 'раза', 'раз')}`;
@@ -69,4 +69,4 @@ class IntroScreen extends AbstractView {
   }
 }
 
-export default (config, data) => new IntroScreen(config, data);
+export default (config, data) => new RulesScreen(config, data);
