@@ -2,7 +2,6 @@ import AbstractView from '../view';
 import headerBackTemplate from '../templates/headerBack';
 import renderStats from '../templates/renderStats';
 
-
 class StatsScreen extends AbstractView {
 
   constructor({pageTitle, results}) {
@@ -22,13 +21,13 @@ class StatsScreen extends AbstractView {
   }
 
   _renderResult(result, index) {
-    const {answers, additionals, isSuccess, final} = result;
+    const {answers, additionals, isSuccess, final, maxQuestions} = result;
     return `
       <table class="result__table">
         <tr>
           <td class="result__number">${index + 1}.</td>
             <td colspan="2">
-              ${renderStats(answers)}
+              ${renderStats({answers, maxQuestions})}
             </td>
             ${this._renderResultScore(result)}
         </tr>

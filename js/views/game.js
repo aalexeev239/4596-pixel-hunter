@@ -2,7 +2,13 @@ import AbstractView from '../view';
 import renderQuestion from '../templates/renderQuestion';
 import renderStats from '../templates/renderStats';
 import questionTypes from '../constants/questionTypes';
+import imageLoader from '../image-loader/image-loader';
 
+const IMAGE_SIZES = new Map([
+  [questionTypes.GUESS_EVERY_OPTION, {width: 468, height: 458}],
+  [questionTypes.GUESS_SINGLE_OPTION, {width: 705, height: 455}],
+  [questionTypes.FIND_PAINT, {width: 304, height: 455}]
+]);
 
 class GameScreen extends AbstractView {
 
@@ -19,7 +25,7 @@ class GameScreen extends AbstractView {
       <div class="game">
         ${renderQuestion(this._question)}
         <div class="stats">
-          ${renderStats(this._state.answers)}
+          ${renderStats(this._state)}
         </div>
       </div>
     `;
@@ -27,6 +33,15 @@ class GameScreen extends AbstractView {
 
   bindHandlers() {
     this._formElement = this.element.querySelector('form');
+
+    const images = this.element.querySelectorAll('img');
+
+    for (let image of images) {
+      let {width, height} = IMAGE_SIZES.get(this._question.type);
+      imageLoader(image).load({
+        url: image.src
+      }, width, height);
+    }
 
     // collect input names for multiple options or get single name for else
     if (this._question.type === questionTypes.GUESS_EVERY_OPTION) {

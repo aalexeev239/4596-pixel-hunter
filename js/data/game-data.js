@@ -1,246 +1,98 @@
-import questionTypes from '../constants/questionTypes';
-
-export const correctAnswers = [
-  ['paint', 'photo'],
-  'photo',
-  'Option 1',
-  ['paint', 'photo'],
-  'photo',
-  'Option 1',
-  ['paint', 'photo'],
-  'photo',
-  'Option 1',
-  ['paint', 'photo']
-];
-
-export const questions = [
+export default JSON.parse(`[
   {
-    type: questionTypes.GUESS_EVERY_OPTION,
-    options: [
+    "type": "two-of-two",
+    "question": "Угадайте для каждого изображения фото или рисунок?",
+    "answers": [
       {
-        name: 'question2',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 1',
-          width: 468,
-          height: 458
-        }
+        "image": {
+          "url": "http://placehold.it/468x458",
+          "width": 468,
+          "height": 458
+        },
+        "type": "photo"
       },
       {
-        name: 'question1',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 2',
-          width: 468,
-          height: 458
-        }
+        "image": {
+          "url": "http://placehold.it/468x458",
+          "width": 468,
+          "height": 458
+        },
+        "type": "painting"
       }
     ]
   },
   {
-    type: questionTypes.GUESS_SINGLE_OPTION,
-    option: {
-      name: 'question1',
-      image: {
-        url: 'http://placehold.it/705x455',
-        title: 'Option 1',
-        width: 705,
-        height: 455
-      }
-    }
-  },
-  {
-    type: questionTypes.FIND_PAINT,
-    options: [
+    "type": "tinder-like",
+    "question": "Угадай, фото или рисунок?",
+    "answers": [
       {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 1',
-          width: 304,
-          height: 455
+        "image": {
+          "url": "http://placehold.it/705x455",
+          "width": 705,
+          "height": 455
         },
-        isSelected: false
-      },
-      {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 2',
-          width: 304,
-          height: 455
-        },
-        isSelected: true
-      },
-      {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 3',
-          width: 304,
-          height: 455
-        },
-        isSelected: false
+        "type": "photo"
       }
     ]
   },
   {
-    type: questionTypes.GUESS_EVERY_OPTION,
-    options: [
+    "type": "one-of-three",
+    "question": "Найдите рисунок среди изображений",
+    "answers": [
       {
-        name: 'question1',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 1',
-          width: 468,
-          height: 458
-        }
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
+        },
+        "type": "photo"
       },
       {
-        name: 'question2',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 2',
-          width: 468,
-          height: 458
-        }
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
+        },
+        "type": "painting"
+      },
+      {
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
+        },
+        "type": "photo"
       }
     ]
   },
   {
-    type: questionTypes.GUESS_SINGLE_OPTION,
-    option: {
-      name: 'question1',
-      image: {
-        url: 'http://placehold.it/705x455',
-        title: 'Option 1',
-        width: 705,
-        height: 455
-      }
-    }
-  },
-  {
-    type: questionTypes.FIND_PAINT,
-    options: [
+    "type": "one-of-three",
+    "question": "Найдите фото среди изображений",
+    "answers": [
       {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 1',
-          width: 304,
-          height: 455
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
         },
-        isSelected: false
+        "type": "painting"
       },
       {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 2',
-          width: 304,
-          height: 455
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
         },
-        isSelected: true
+        "type": "painting"
       },
       {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 3',
-          width: 304,
-          height: 455
+        "image": {
+          "url": "http://placehold.it/304x455",
+          "width": 304,
+          "height": 455
         },
-        isSelected: false
-      }
-    ]
-  },
-  {
-    type: questionTypes.GUESS_EVERY_OPTION,
-    options: [
-      {
-        name: 'question1',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 1',
-          width: 468,
-          height: 458
-        }
-      },
-      {
-        name: 'question2',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 2',
-          width: 468,
-          height: 458
-        }
-      }
-    ]
-  },
-  {
-    type: questionTypes.GUESS_SINGLE_OPTION,
-    option: {
-      name: 'question1',
-      image: {
-        url: 'http://placehold.it/705x455',
-        title: 'Option 1',
-        width: 705,
-        height: 455
-      }
-    }
-  },
-  {
-    type: questionTypes.FIND_PAINT,
-    options: [
-      {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 1',
-          width: 304,
-          height: 455
-        },
-        isSelected: false
-      },
-      {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 2',
-          width: 304,
-          height: 455
-        },
-        isSelected: true
-      },
-      {
-        image: {
-          url: 'http://placehold.it/304x455',
-          title: 'Option 3',
-          width: 304,
-          height: 455
-        },
-        isSelected: false
-      }
-    ]
-  },
-  {
-    type: questionTypes.GUESS_EVERY_OPTION,
-    options: [
-      {
-        name: 'question1',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 1',
-          width: 468,
-          height: 458
-        }
-      },
-      {
-        name: 'question2',
-        image: {
-          url: 'http://placehold.it/468x458',
-          title: 'Option 2',
-          width: 468,
-          height: 458
-        }
+        "type": "photo"
       }
     ]
   }
-];
-
-export default {
-  questions,
-  correctAnswers
-};
+]`);

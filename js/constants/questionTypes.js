@@ -1,5 +1,10 @@
+export const questionFindPaintTypesMap = new Map([
+  ['Найдите фото среди изображений', 'photo'],
+  ['Найдите рисунок среди изображений', 'painting'],
+]);
+
 export default {
-  GUESS_EVERY_OPTION: 'Угадайте для каждого изображения фото или рисунок?',
-  GUESS_SINGLE_OPTION: 'Угадай, фото или рисунок?',
-  FIND_PAINT: 'Найдите рисунок среди изображений?'
+  GUESS_EVERY_OPTION: 'two-of-two',
+  GUESS_SINGLE_OPTION: 'tinder-like',
+  FIND_PAINT: 'one-of-three'
 };

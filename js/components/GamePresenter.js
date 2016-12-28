@@ -1,19 +1,16 @@
 import GameModel from './GameModel';
 import {getStatsData} from './game';
 import Application from '../application';
-
-import data from '../data/game-data';
+import {server as serverConfig} from '../config';
 import Timer from './timer';
 import createGameHeaderView from '../views/gameHeader';
 import createGameView from '../views/game';
+import checkResponseStatus from '../utils/checkResponseStatus';
 
 
 class GamePresenter {
-  constructor(Model) {
-    this._data = this._getData(); // promisify
-
-    this._model = new Model(this._data.questions);
-
+  constructor(username = serverConfig.NO_USER) {
+    this._username = username;
     this._header = {element: document.createElement('div')};
     this._gameContent = {element: document.createElement('div')};
     this.root = document.createElement('div');
@@ -22,23 +19,27 @@ class GamePresenter {
   }
 
   start() {
-    this._changeLevel();
+    this._getData().then((data) => {
+      this._model = new GameModel(data);
+      this._changeLevel();
+    });
   }
 
 
   _getData() {
-    return data;
+    return window.fetch(serverConfig.QUESTIONS_URL).then(checkResponseStatus).then((response) => response.json()).catch(this._handleError);
   }
 
   _changeLevel() {
+    if (this._gameContent.clearHandlers) {
+      this._gameContent.clearHandlers();
+    }
     if (this._model.canGoNext()) {
       this._model.setNextQuestion();
 
       const gameContent = createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
       this.root.replaceChild(gameContent.element, this._gameContent.element);
-      if (this._gameContent.clearHandlers) {
-        this._gameContent.clearHandlers();
-      }
+
       this._gameContent = gameContent;
 
       this._timer = new Timer(
@@ -52,8 +53,7 @@ class GamePresenter {
       this._timer.start();
       return;
     }
-
-    Application.showStats(getStatsData(this._model.getState()));
+    this._showStats();
   }
 
   _onAnswer(answer) {
@@ -74,11 +74,30 @@ class GamePresenter {
     }
     this._header = header;
   }
+
+  _showStats() {
+    const requestUrl = serverConfig.STATS_URL_TEMPLATE.replace(/:username/g, this._username);
+    const {answers, lives, maxQuestions} = this._model.getState();
+    const payload = JSON.stringify({
+      stats: answers,
+      lives
+    });
+
+    window.fetch(requestUrl, {
+      method: 'POST',
+      body: payload
+    }).then(() => {
+      window.fetch(requestUrl).then(checkResponseStatus).then((response) => response.json()).then((response) => Application.showStats(getStatsData(response, maxQuestions)));
+    }).catch(this._handleError);
+  }
+
+  _handleError(error) {
+    Application.showError(error);
+  }
 }
 
-const game = new GamePresenter(GameModel);
-
-export default () => {
+export default (username) => {
+  const game = new GamePresenter(username);
   game.start();
   return game.root;
 };

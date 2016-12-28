@@ -28,11 +28,15 @@ export default class Application {
     renderView(createRulesView(config, data).element);
   }
 
-  static showGame() {
-    renderView(createGame());
+  static showGame(username) {
+    renderView(createGame(username));
   }
 
   static showStats(stats) {
     renderView(createStatsView(stats).element);
+  }
+
+  static showError(error) {
+    throw error;
   }
 }

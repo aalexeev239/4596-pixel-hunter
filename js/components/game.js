@@ -1,9 +1,11 @@
 import {answerTypes} from '../constants/answerTypes';
 import {scores} from '../constants/scores';
 import questionTypes from '../constants/questionTypes';
+import {questionFindPaintTypesMap} from '../constants/questionTypes';
+
 import isInteger from '../utils/isInteger';
+
 import {lives as livesConfig, timer as timerConfig} from '../config';
-import {questions, correctAnswers} from '../data/game-data';
 
 export const setLives = (state, lives) => {
   if (!isInteger(lives)) {
@@ -30,32 +32,33 @@ export const setQuestion = (state, questionIndex) => {
     throw new RangeError('question index should be non-negative');
   }
 
-  if (questionIndex >= questions.length) {
+  if (questionIndex >= state.maxQuestions) {
     throw new RangeError('question index are greater than possible');
   }
 
   return Object.assign({}, state, {currentQuestion: questionIndex});
 };
 
-const validateAnswer = (answer, index) => {
-  if (!isInteger(index) || index < 0 || index >= correctAnswers.length) {
-    return false;
-  }
-  const question = questions[index];
-  const correctAnswer = correctAnswers[index];
+const validateAnswer = (answer, question) => {
+  switch (question.type) {
+    case questionTypes.GUESS_EVERY_OPTION:
+      return Array.isArray(answer) &&
+        question.answers.every((qAnswer, i) => qAnswer.type === answer[i]);
 
-  if (question.type === questionTypes.GUESS_EVERY_OPTION) {
-    if (!Array.isArray(answer)) {
+    case questionTypes.GUESS_SINGLE_OPTION:
+      return question.answers[0].type === answer;
+
+    case questionTypes.FIND_PAINT:
+      answer = +answer;
+      return isInteger(answer) &&
+        answer < question.answers.length &&
+        question.answers[answer].type === questionFindPaintTypesMap.get(question.question);
+    default:
       return false;
-    }
-
-    return correctAnswer.every((cAnswer, i) => cAnswer === answer[i]);
   }
-
-  return correctAnswer === answer;
 };
 
-export const setAnswer = (state, {answer, time}) => {
+export const setAnswer = (state, {answer, time}, question) => {
   const {answers, currentQuestion, lives} = state;
   let resultAnswer;
   let resultLives = lives;
@@ -76,7 +79,7 @@ export const setAnswer = (state, {answer, time}) => {
   if (!answer || time === 0) {
     resultAnswer = answerTypes.UNKNOWN;
     resultLives = lives - 1;
-  } else if (validateAnswer(answer, currentQuestion)) {
+  } else if (validateAnswer(answer, question)) {
     if (timerConfig.SECONDS_PER_LEVEL - time < 10) {
       resultAnswer = answerTypes.FAST;
     } else if (timerConfig.SECONDS_PER_LEVEL - time > 20) {
@@ -138,21 +141,15 @@ const getAdditionals = (answers, lives) => {
   return result;
 };
 
-export const getStatsData = (state) => {
-  const {lives, answers, currentQuestion} = state;
-  let pageTitle = 'FAIL';
+const getSingleStatsData = ({stats, lives}) => {
+  const answers = stats || []; // backend tro-lo-lo
   let isSuccess = false;
   let points = null;
   let total = null;
   let additionals = [];
   let final = null;
 
-  if (answers.length > questions.length) {
-    throw new RangeError('too many answers');
-  }
-
-  if (lives > 0 && currentQuestion === questions.length - 1) {
-    pageTitle = 'Победа!';
+  if (answers.length && lives > 0) {
     isSuccess = true;
     points = 100; // WTF??????
     total = answers.filter(isAnswerCorrect).length * scores.CORRECT;
@@ -161,16 +158,26 @@ export const getStatsData = (state) => {
   }
 
   return {
-    pageTitle,
-    results: [{
-      answers,
-      isSuccess,
-      points,
-      total,
-      additionals,
-      final
-    }]
+    answers,
+    isSuccess,
+    points,
+    total,
+    additionals,
+    final
   };
 };
 
-
+export const getStatsData = (resultsArray, maxQuestions) => {
+  let pageTitle = 'FAIL';
+  const results = resultsArray
+    .map((result) => {
+      return Object.assign({}, getSingleStatsData(result), {maxQuestions});
+    });
+  if (results.length && results.every((result) => result.isSuccess)) {
+    pageTitle = 'Победа!';
+  }
+  return {
+    pageTitle,
+    results
+  };
+};

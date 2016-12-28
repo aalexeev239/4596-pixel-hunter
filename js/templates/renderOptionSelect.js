@@ -1,6 +1,6 @@
-const func = ({image: {url, title, width, height}, isSelected}) => `<label class="game__option${isSelected ? ' game__option--selected' : ''}">
-    <img src="${url}" alt="${title}" width="${width}" height="${height}">
-     <input type="radio" name="question" value="${title}" name="${title}" class="hidden">
+const func = ({image: {url, width, height}}, index) => `<label class="game__option">
+    <img src="${url}" alt="${index}" width="${width}" height="${height}">
+    <input type="radio" name="question" value="${index}" name="img" class="hidden">
   </label>`;
 
 export default func;
