@@ -27,7 +27,7 @@ class GamePresenter {
 
 
   _getData() {
-    return window.fetch(serverConfig.QUESTIONS_URL + '1111').then(checkResponseStatus).then((response) => response.json()).catch(this._handleError);
+    return window.fetch(serverConfig.QUESTIONS_URL).then(checkResponseStatus).then((response) => response.json()).catch(this._handleError);
   }
 
   _changeLevel() {
