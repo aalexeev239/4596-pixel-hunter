@@ -170,10 +170,8 @@ const getSingleStatsData = ({stats, lives}) => {
 export const getStatsData = (resultsArray, maxQuestions) => {
   let pageTitle = 'FAIL';
   const results = resultsArray
-    .map(getSingleStatsData)
     .map((result) => {
-      result.maxQuestions = maxQuestions;
-      return result;
+      return Object.assign({}, getSingleStatsData(result), {maxQuestions});
     });
   if (results.length && results.every((result) => result.isSuccess)) {
     pageTitle = 'Победа!';
