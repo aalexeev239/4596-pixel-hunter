@@ -46,6 +46,12 @@ class RulesScreen extends AbstractView {
     this._formElement.addEventListener('submit', this._onSubmit);
   }
 
+  clearHandlers() {
+    this._inputElement.removeEventListener('input', this._onInput);
+    this._formElement.removeEventListener('submit', this._onSubmit);
+    this._inputElement.value = '';
+  }
+
   _checkInputValidity() {
     return this._inputElement.value.trim().length > 0;
   }
@@ -62,12 +68,6 @@ class RulesScreen extends AbstractView {
       this.clearHandlers();
       Application.showGame(username);
     }
-  }
-
-  clearHandlers() {
-    this._inputElement.removeEventListener('input', this._onInput);
-    this._formElement.removeEventListener('submit', this._onSubmit);
-    this._inputElement.value = '';
   }
 }
 
