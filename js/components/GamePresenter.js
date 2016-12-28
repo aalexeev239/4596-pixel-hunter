@@ -29,17 +29,9 @@ class GamePresenter {
   }
 
   _changeLevel() {
-    if (this._gameContent.clearHandlers) {
-      this._gameContent.clearHandlers();
-    }
     if (this._model.canGoNext()) {
       this._model.setNextQuestion();
-
-      const gameContent = createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this));
-      this.root.replaceChild(gameContent.element, this._gameContent.element);
-
-      this._gameContent = gameContent;
-
+      this._replaceView('_gameContent', createGameView(this._model.getState(), this._model.getQuestion(), this._onAnswer.bind(this)));
       this._timer = new Timer(
         () => {
           this._updateHeader();
@@ -51,6 +43,11 @@ class GamePresenter {
       this._timer.start();
       return;
     }
+
+    if (this._gameContent.clearHandlers) {
+      this._gameContent.clearHandlers();
+    }
+
     this._showStats();
   }
 
@@ -65,12 +62,7 @@ class GamePresenter {
 
   _updateHeader() {
     const time = this._timer ? this._timer.getTime() : null;
-    const header = createGameHeaderView(this._model.getState().lives, time);
-    this.root.replaceChild(header.element, this._header.element);
-    if (this._header.clearHandlers) {
-      this._header.clearHandlers();
-    }
-    this._header = header;
+    this._replaceView('_header', createGameHeaderView(this._model.getState().lives, time));
   }
 
   _showStats() {
@@ -91,6 +83,14 @@ class GamePresenter {
 
   _handleError(error) {
     Application.showError(error);
+  }
+
+  _replaceView(name, view) {
+    this.root.replaceChild(view.element, this[name].element);
+    if (this[name].clearHandlers) {
+      this[name].clearHandlers();
+    }
+    this[name] = view;
   }
 }
 
